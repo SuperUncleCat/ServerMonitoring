@@ -19,14 +19,14 @@ var session = ping.createSession();
 var transporter = nodemailer.createTransport(smtpTransport({
     host: 'smtp.kagoya.net',
     auth: {
-        user: 'kir080295.system',
-        pass: '1vmlbo45dm'
+        user: '',
+        pass: ''
     }
 }))
 
 var mailOptions = (element, address) => ({
-    from: 'sysadmin@togo-sec.co.jp',
-    to: 'h-zhang@junction.tokyo',
+    from: '',
+    to: '',
     subject: element + ' ' + 'server is down!',
     text: 'The' + ' ' + element + ' ' + 'with ip address of' + ' ' + address + ' ' + 'is not responding!'
 })
