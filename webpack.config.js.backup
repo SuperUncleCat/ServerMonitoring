@@ -1,0 +1,21 @@
+var path = require('path')
+var webpack = require('webpack')
+module.exports = {
+    entry: {
+        app: './client/app',
+    },
+    output: {
+        filename: 'bundle.js',
+        path: path.join(__dirname, './server/public')
+    },
+    module: {
+        loaders: [{
+            test: /\.js?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            query: {
+                presets: ['es2015', 'stage-0', 'react']
+            },
+        }]
+    }
+}
