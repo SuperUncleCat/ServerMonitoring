@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Router, Route, hashHistory } from 'react-router'
 import { Segment, Icon, Table, Modal, Button, Form } from 'semantic-ui-react'
 const axios = require('axios')
-export default class ListContainer extends Component {
+class ListContainer extends Component {
     static propTypes = {
         post_data: PropTypes.object.isRequired,
         onDeleteServer: PropTypes.func,
         onEditServer: PropTypes.func,
+        initServers: PropTypes.func,
         index: PropTypes.number
     }
 
@@ -88,8 +90,8 @@ export default class ListContainer extends Component {
             if (response.data.success === false) {
                 alert("error")
             } else {
-                //window.location.reload();
-                //dispatch(onEditServer(index, data))
+                window.location.reload();
+                //console.log(this.props.post_data)
                 dispatch(onEditServer(index, {
                     querymark: this.props.post_data._id,
                     servername: this.state.servername,
@@ -184,3 +186,22 @@ export default class ListContainer extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        servers: state.servers
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onEditServer: (index, data) => {
+            dispatch(editServer(index, data))
+        },
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ListContainer)

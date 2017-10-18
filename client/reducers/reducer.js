@@ -22,13 +22,13 @@ export default function(state, action) {
         }
     case EDIT_SERVER:
         return {
-            /*servers: [...state.servers.slice(0, action.index), Object.assign({}, state.servers[action.index], {
+            servers: [...state.servers.slice(0, action.index), Object.assign({}, state.servers[action.index], {
                 done: true
             }), ...state.servers.slice(action.index + 1)]
-            servers: Object.assign([...state.servers], {
-                [index]: action.data
-            })*/
-            servers: Object.assign({}, state[action.index], action.data)
+        /*servers: Object.assign([...state.servers], {
+            [index]: action.data
+        })*/
+        //servers: Object.assign({}, state[action.index], action.data)
         }
     case DELETE_SERVER:
         return {

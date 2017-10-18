@@ -17,13 +17,17 @@ class SegmentContainer extends Component {
 
     constructor() {
         super()
+        //this._loadData()
+        this.state = {
+            servername: '',
+            jpname: '',
+            ipaddress: '',
+            priority: ''
+        }
+    }
+
+    componentWillMount() {
         this._loadData()
-    /*this.state = {
-        servername: '',
-        jpname: '',
-        ipaddress: '',
-        priority: ''
-    }*/
     }
 
     componentDidMount() {
@@ -61,6 +65,7 @@ class SegmentContainer extends Component {
                 })
                 posts_data.sort(_dataCompare);
                 this.props.initServers(posts_data)
+            //dispatch(initServers(posts_data))
             }).catch(() => {
         })
 
@@ -74,7 +79,7 @@ class SegmentContainer extends Component {
             if (response.data.success === false) {
                 alert("error");
             } else {
-                //window.location.reload();
+                window.location.reload();
             }
         }).catch(() => {
         })
@@ -124,6 +129,7 @@ class SegmentContainer extends Component {
             if (response.data.success === false) {
                 alert("error");
             } else {
+                window.location.reload()
                 dispatch(onAddServer(index, {
                     servername: this.state.servername,
                     jpname: this.state.jpname,
