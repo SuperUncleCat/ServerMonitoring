@@ -36,7 +36,7 @@ class SegmentContainer extends Component {
         }
         this.timer = setInterval(() => {
             this._loadData()
-        }, 3000)
+        }, 2000)
     }
 
     componentWillUnmount() {
@@ -79,7 +79,7 @@ class SegmentContainer extends Component {
             if (response.data.success === false) {
                 alert("error");
             } else {
-                window.location.reload();
+                //window.location.reload();
             }
         }).catch(() => {
         })
@@ -129,7 +129,7 @@ class SegmentContainer extends Component {
             if (response.data.success === false) {
                 alert("error");
             } else {
-                window.location.reload()
+                //window.location.reload()
                 dispatch(onAddServer(index, {
                     servername: this.state.servername,
                     jpname: this.state.jpname,

@@ -7,7 +7,8 @@ import serversReducer from './reducers/reducer'
 //const store = createStore(serversReducer, window.__REDUX_STATE__)
 const store = createStore(
     serversReducer,
-    window.devToolsExtension ? window.devToolsExtension() : undefined
+    window.REDUX_STATE,
+//window.devToolsExtension ? window.devToolsExtension() : undefined
 );
 ReactDOM.render(
     <Provider store={store}>

@@ -90,7 +90,7 @@ class ListContainer extends Component {
             if (response.data.success === false) {
                 alert("error")
             } else {
-                window.location.reload();
+                //window.location.reload();
                 //console.log(this.props.post_data)
                 dispatch(onEditServer(index, {
                     querymark: this.props.post_data._id,
