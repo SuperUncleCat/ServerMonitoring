@@ -279,9 +279,6 @@ const mapDispatchToProps = (dispatch) => {
         onDeleteServer: (index) => {
             dispatch(deleteServer(index))
         },
-        onEditServer: (index, data) => {
-            dispatch(editServer(index, data))
-        },
         onAddServer: (server) => {
             dispatch(addServer(server))
         }
