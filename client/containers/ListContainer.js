@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Router, Route, hashHistory } from 'react-router'
-import { Segment, Icon, Table, Modal, Button, Form } from 'semantic-ui-react'
+import { Segment, Icon, Table, Modal, Button, Form, Input } from 'semantic-ui-react'
 const axios = require('axios')
 class ListContainer extends Component {
     static propTypes = {
@@ -45,7 +45,7 @@ class ListContainer extends Component {
         this.setState({
             open: false
         })
-    }*/
+    }
 
     handleServerNameChange(event) {
         this.setState({
@@ -75,7 +75,7 @@ class ListContainer extends Component {
         this.setState({
             priority: event.target.value
         })
-    }
+    }*/
 
     handleSubmit(index) {
         axios.post('/edit', {
@@ -93,12 +93,13 @@ class ListContainer extends Component {
                 //window.location.reload();
                 //console.log(this.props.post_data)
                 dispatch(onEditServer(index, {
-                    querymark: this.props.post_data._id,
+                    //querymark: this.props.post_data._id,
                     servername: this.state.servername,
                     jpname: this.state.jpname,
                     ipaddress: this.state.ipaddress,
                     port: this.state.port,
-                    priority: this.state.priority
+                    priority: this.state.priority,
+                    id,
                 }))
             }
         }).catch(() => {
@@ -122,67 +123,152 @@ class ListContainer extends Component {
     })
 
     render() {
-        const {open, size, dimmer} = this.state
+        if (this.state.open) {
+            return this.renderOpen()
+        }
+        const {open} = this.state
         const post_data = this.props.post_data
         var updated_time = (new Date(post_data.updated_at)).toLocaleString().replace('/T/', '').replace('/\../+', '')
         var state_color = (post_data.state == "green") ? "green" : "red"
         var icon_name = (post_data.state == "green") ? "smile" : "warning sign"
         return (
             <Table.Row>
-                <Table.Cell><Icon name={icon_name} color={state_color}/></Table.Cell>
-                <Table.Cell>{post_data.jp_name}</Table.Cell>
-                <Table.Cell>{post_data.ip_address}</Table.Cell>
-                <Table.Cell>{post_data.port}</Table.Cell>
-                <Table.Cell>{updated_time}</Table.Cell>
-                <Table.Cell>{post_data.priority}</Table.Cell>
-                <Table.Cell>
-                    <div>
-                        <Icon link name='settings' color='purple' onClick={this.show('small', 'blurring')} />
-                        <Modal size={size} dimmer={dimmer} open={open} onClose={this.close} closeIcon>
-                        <Modal.Header>Edit</Modal.Header>             
-                        <Modal.Content>
-                            <Modal.Description>
-                                <Form>
-                                <Form.Group width='equal'>
-                                <Form.Field>
-                                    <label>Server Name</label>
-                                    <input value={this.state.servername} onChange={this.handleServerNameChange.bind(this)} />
-                                </Form.Field>
-                                <Form.Field>
-                                    <label>JP Name</label>
-                                    <input value={this.state.jpname} onChange={this.handleJPNameChange.bind(this)} />
-                                </Form.Field>
-                                </Form.Group>
-                                <Form.Group width='equal'>
-                                <Form.Field>
-                                    <label>IP Address</label>
-                                    <input value={this.state.ipaddress} onChange={this.handleIPChange.bind(this)} />
-                                </Form.Field>
-                                <Form.Field>
-                                    <label>Priority</label>
-                                    <input value={this.state.priority} onChange={this.handlePriorityChange.bind(this)} />
-                                </Form.Field>
-                                </Form.Group>
-                                <Form.Group>
-                                <Form.Field>
-                                    <label>Port</label>
-                                    <input value={this.state.port} onChange={this.handlePORTChange.bind(this)} />
-                                </Form.Field>
-                                </Form.Group>
-                                </Form>
-                            </Modal.Description>
-                        </Modal.Content>
-                        <Modal.Actions>
-                        <Button color='black' onClick={this.close}>
-                            Nope
-                        </Button>
-                        <Button positive icon='checkmark' labelPosition='right' content="Submit" onClick={this.handleSubmit.bind(this)} />
-                        </Modal.Actions>
-                        </Modal>
-                    </div>
-                </Table.Cell>
-                <Table.Cell><Icon link name='trash' color='purple' onClick={this.handleDeleteServer.bind(this)} /></Table.Cell>
-            </Table.Row>
+            <Table.Cell><Icon name={icon_name} color={state_color}/></Table.Cell>
+            <Table.Cell>{post_data.jp_name}</Table.Cell>
+            <Table.Cell>{post_data.ip_address}</Table.Cell>
+            <Table.Cell>{post_data.port}</Table.Cell>
+            <Table.Cell>{updated_time}</Table.Cell>
+            <Table.Cell>{post_data.priority}</Table.Cell>
+            <Table.Cell>
+                <div>
+                    <Icon link name='settings' color='purple' onClick={() => {
+                this.setState({
+                    open: true
+                })
+            }} />
+                </div>
+            </Table.Cell>
+            <Table.Cell><Icon link name='trash' color='purple' onClick={this.handleDeleteServer.bind(this)} /></Table.Cell>
+        </Table.Row>
+        )
+    /*return (
+        <Table.Row>
+            <Table.Cell><Icon name={icon_name} color={state_color}/></Table.Cell>
+            <Table.Cell>{post_data.jp_name}</Table.Cell>
+            <Table.Cell>{post_data.ip_address}</Table.Cell>
+            <Table.Cell>{post_data.port}</Table.Cell>
+            <Table.Cell>{updated_time}</Table.Cell>
+            <Table.Cell>{post_data.priority}</Table.Cell>
+            <Table.Cell>
+                <div>
+                    <Icon link name='settings' color='purple' onClick={this.show('small', 'blurring')} />
+                    <Modal size={size} dimmer={dimmer} open={open} onClose={this.close} closeIcon>
+                    <Modal.Header>Edit</Modal.Header>             
+                    <Modal.Content>
+                        <Modal.Description>
+                            <Form>
+                            <Form.Group width='equal'>
+                            <Form.Field>
+                                <label>Server Name</label>
+                                <input value={this.state.servername} onChange={this.handleServerNameChange.bind(this)} />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>JP Name</label>
+                                <input value={this.state.jpname} onChange={this.handleJPNameChange.bind(this)} />
+                            </Form.Field>
+                            </Form.Group>
+                            <Form.Group width='equal'>
+                            <Form.Field>
+                                <label>IP Address</label>
+                                <input value={this.state.ipaddress} onChange={this.handleIPChange.bind(this)} />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Priority</label>
+                                <input value={this.state.priority} onChange={this.handlePriorityChange.bind(this)} />
+                            </Form.Field>
+                            </Form.Group>
+                            <Form.Group>
+                            <Form.Field>
+                                <label>Port</label>
+                                <input value={this.state.port} onChange={this.handlePORTChange.bind(this)} />
+                            </Form.Field>
+                            </Form.Group>
+                            </Form>
+                        </Modal.Description>
+                    </Modal.Content>
+                    <Modal.Actions>
+                    <Button color='black' onClick={this.close}>
+                        Nope
+                    </Button>
+                    <Button positive icon='checkmark' labelPosition='right' content="Submit" onClick={this.handleSubmit.bind(this)} />
+                    </Modal.Actions>
+                    </Modal>
+                </div>
+            </Table.Cell>
+            <Table.Cell><Icon link name='trash' color='purple' onClick={this.handleDeleteServer.bind(this)} /></Table.Cell>
+        </Table.Row>
+    )*/
+    }
+
+    renderOpen() {
+        const {open} = this.state
+        const post_data = this.props.post_data
+        var updated_time = (new Date(post_data.updated_at)).toLocaleString().replace('/T/', '').replace('/\../+', '')
+        //var state_color = (post_data.state == "green") ? "green" : "red"
+        //var icon_name = (post_data.state == "green") ? "smile" : "warning sign"
+        return (
+            <Table.Row>
+            <Table.Cell>
+            <Input size='small' placeholder={this.state.servername} onChange={(e) => {
+                this.setState({
+                    servername: e.target.value
+                })
+            }}/>
+            </Table.Cell>
+            <Table.Cell>
+            <Input size='small' placeholder={this.state.jpname} onChange={(e) => {
+                this.setState({
+                    jpname: e.target.value
+                })
+            }}/>
+            </Table.Cell>
+            <Table.Cell>
+            <Input size='small' placeholder={this.state.ipaddress} onChange={(e) => {
+                this.setState({
+                    ipaddress: e.target.value
+                })
+            }}/>
+            </Table.Cell>
+            <Table.Cell>
+            <Input size='small' placeholder={this.state.port} onChange={(e) => {
+                this.setState({
+                    port: e.target.value
+                })
+            }}/>
+            </Table.Cell>
+            <Table.Cell>
+            <Input size='small' disabled placeholder={updated_time} />
+            </Table.Cell>
+            <Table.Cell>
+            <Input size='small' placeholder={this.state.priority} onChange={(e) => {
+                this.setState({
+                    priority: e.target.value
+                })
+            }}/>
+            </Table.Cell>
+            <Table.Cell>
+                <div>
+                    <Icon link name='checkmark' color='purple' onClick={this.handleSubmit.bind(this)} />
+                </div>
+            </Table.Cell>
+            <Table.Cell>
+            <Icon link name='remove' color='purple' onClick={() => {
+                this.setState({
+                    open: false
+                })
+            }}/>
+            </Table.Cell>
+        </Table.Row>
         )
     }
 }

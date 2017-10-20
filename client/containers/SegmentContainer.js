@@ -196,7 +196,7 @@ class SegmentContainer extends Component {
             <Container style = {{
                 marginTop: '6em'
             }}>
-                <Table unstackable>
+                <Table unstackable size='small'>
                     <Table.Header>
                         <Table.Row>
                         <Table.HeaderCell colSpan='8'>

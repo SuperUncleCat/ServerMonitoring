@@ -7,7 +7,7 @@
     <title>Server Monitoring</title>
   </head>
   <body>
-    <div id="root"><%- root %></div>
+    <div id="root"><%- renderView %></div>
     <script>
       try {
         window.__REDUX_STATE__ = JSON.parse('<%- JSON.stringify(reduxData) %>');

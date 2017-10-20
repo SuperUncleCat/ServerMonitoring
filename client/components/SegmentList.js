@@ -30,8 +30,9 @@ export default class SegmentList extends Component {
                 {this.props.posts_data.map((data, i) => <ListContainer
                 post_data={data}
                 key={data.id}
-                {...x}
-                index={i} onDeleteServer={this.handleDeleteServer.bind(this)} />
+                {...data}
+                index={i}
+                onDeleteServer={this.handleDeleteServer.bind(this)} />
             )}
             </div>
         )
