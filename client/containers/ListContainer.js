@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { editServer } from '../reducers/reducer'
 import { Router, Route, hashHistory } from 'react-router'
 import { Segment, Icon, Table, Modal, Button, Form, Input } from 'semantic-ui-react'
 const axios = require('axios')
@@ -258,7 +259,7 @@ class ListContainer extends Component {
             </Table.Cell>
             <Table.Cell>
                 <div>
-                    <Icon link name='checkmark' color='purple' onClick={this.handleSubmit.bind(this)} />
+                    <Icon link name='checkmark' color='purple' onClick={(this.handleSubmit.bind(this))} />
                 </div>
             </Table.Cell>
             <Table.Cell>
