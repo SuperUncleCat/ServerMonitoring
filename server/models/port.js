@@ -19,22 +19,22 @@ var Log = mongoose.model("Log", logSchema);
 var session = ping.createSession();
 
 var transporter = nodemailer.createTransport(smtpTransport({
-    host: 'smtp.kagoya.net',
+    host: '',
     auth: {
-        user: 'kir080295.system',
-        pass: '1vmlbo45dm'
+        user: '',
+        pass: ''
     }
 }))
 
 var mailOptions_one = (element, address, port, email) => ({
-    from: 'sysadmin@togo-sec.co.jp',
+    from: '',
     to: email,
     subject: 'port of' + ' ' + port + ' ' + element + ' ' + 'server is down!',
     text: 'port of' + ' ' + port + ' ' + element + ' ' + address + ' ' + 'is not responding!'
 })
 
 var mailOptions_two = (element, address, email) => ({
-    from: 'sysadmin@togo-sec.co.jp',
+    from: '',
     to: email,
     subject: element + ' ' + 'server is down!',
     text: 'The' + ' ' + element + ' ' + 'with ip address of' + ' ' + address + ' ' + 'is not responding!'
