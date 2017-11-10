@@ -30,15 +30,17 @@ export default class MailList extends Component {
         }
     }
 
+
     render() {
         const email_post_data = this.props.email_post_data
-
-        return (
-            <Table.Row>
+        if (email_post_data) {
+            return (
+                <Table.Row>
                 <Table.Cell>{email_post_data.email_address}</Table.Cell>
                 <Table.Cell>{email_post_data.status}</Table.Cell>
                 <Table.Cell><Icon link name='trash' color='purple' onClick={this.handleDelMail.bind(this)} /></Table.Cell>
             </Table.Row>
-        )
+            )
+        }
     }
 }

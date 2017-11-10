@@ -29,7 +29,7 @@ class ListContainer extends Component {
     }
 
     static defaultProps = {
-        data: []
+        post_data: []
     }
 
     handleDeleteServer(index) {

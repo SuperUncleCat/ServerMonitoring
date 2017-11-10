@@ -17,7 +17,7 @@ class SegmentContainer extends Component {
 
     constructor() {
         super()
-        this._loadData()
+        //this._loadData()
         this.state = {
             ischeck: true,
             pcheck: true,
@@ -29,14 +29,14 @@ class SegmentContainer extends Component {
         }
     }
 
-    /*componentWillMount() {
+    componentWillMount() {
         this._loadData()
-    }*/
+    }
 
     componentDidMount() {
-        if (this.timer) {
+        /*if (this.timer) {
             clearInterval(this.timer)
-        }
+        }*/
         this.timer = setInterval(() => {
             this._loadData()
         }, 3000)
@@ -114,7 +114,8 @@ class SegmentContainer extends Component {
                 posts_data.sort(_dataCompare);
                 this.props.onInitServers(posts_data)
             //dispatch(initServers(posts_data))
-            }).catch(() => {
+            }).catch((e) => {
+            console.log(e)
         })
 
     }
