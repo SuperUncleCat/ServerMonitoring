@@ -1,9 +1,7 @@
-module.exports =  (router) => {
-  router.get('/welcome', async function (ctx, next) {
-    ctx.state = {
-      title: 'koa2 title'
-    };
+export default async(ctx, next) => {
+    if (ctx.path.match(/^\/api/)) {
+        return await require('./api').routes()(ctx, next)
+    }
 
-    await ctx.render('welcome', {title: ctx.state});
-  })
+    await require('./render')(ctx, next)
 }

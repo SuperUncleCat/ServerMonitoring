@@ -1,33 +1,33 @@
 //action types
-const INIT_SERVERS = 'INIT_SERVERS'
-const ADD_SERVER = 'ADD_SERVER'
-const DELETE_SERVER = 'DELETE_SERVER'
-const EDIT_SERVER = 'EDIT_SERVER'
+const INIT_STATE = 'INIT_STATE'
+const ADD_STATE = 'ADD_STATE'
+const DELETE_STATE = 'DELETE_STATE'
+const EDIT_STATE = 'EDIT_STATE'
 
 //reducer
 export default function(state, action) {
     if (!state) {
         state = {
-            servers: []
+            data: []
         }
     }
     switch (action.type) {
-    case INIT_SERVERS:
+    case INIT_STATE:
         return {
-            servers: action.servers
+            data: action.data
         }
-    case ADD_SERVER:
+    case ADD_STATE:
         return {
-            servers: [...state.servers, action.server]
+            data: [...state.data, action.data]
         }
-    case EDIT_SERVER:
+    case EDIT_STATE:
         (state, action) => {
-            let servers = Object.assign([...state.servers], {
+            let data = Object.assign([...state.data], {
                 [action.index]: action.data
             })
-            servers.sort((x, y) => x.priority - y.priority)
+            data.sort((x, y) => x.priority - y.priority)
             return {
-                servers
+                data
             }
         }
     /*return {
@@ -39,11 +39,11 @@ export default function(state, action) {
         })
         servers: Object.assign({}, state[action.index], action.data)
     }*/
-    case DELETE_SERVER:
+    case DELETE_STATE:
         return {
-            servers: [
-                ...state.servers.slice(0, action.index),
-                ...state.servers.slice(action.index + 1)
+            data: [
+                ...state.data.slice(0, action.index),
+                ...state.data.slice(action.index + 1)
             ]
         }
     default:
@@ -52,30 +52,30 @@ export default function(state, action) {
 }
 
 // action creators
-export const initServers = (servers) => {
+export const initState = (data) => {
     return {
-        type: INIT_SERVERS,
-        servers
+        type: INIT_STATE,
+        data
     }
 }
 
-export const addServer = (server) => {
+export const addState = (data) => {
     return {
-        type: ADD_SERVER,
-        server
+        type: ADD_STATE,
+        data
     }
 }
 
-export const deleteServer = (index) => {
+export const deleteState = (index) => {
     return {
-        type: DELETE_SERVER,
+        type: DELETE_STATE,
         index
     }
 }
 
-export const editServer = (index, data) => {
+export const editState = (index, data) => {
     return {
-        type: EDIT_SERVER,
+        type: EDIT_STATE,
         index,
         data
     }

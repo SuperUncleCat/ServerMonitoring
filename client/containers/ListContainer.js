@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { editServer } from '../reducers/reducer'
+//import { withRouter } from 'react-router'
+import { editState } from '../reducers/reducer'
 import { Router, Route, hashHistory } from 'react-router'
-import { Segment, Icon, Table, Modal, Button, Form, Input } from 'semantic-ui-react'
+import { Segment, Icon, Table, Modal, Button, Form, Input, Checkbox } from 'semantic-ui-react'
 const axios = require('axios')
 class ListContainer extends Component {
     static propTypes = {
         post_data: PropTypes.object.isRequired,
         onDeleteServer: PropTypes.func,
         onEditServer: PropTypes.func,
-        initServers: PropTypes.func,
+        //onInitServers: PropTypes.func,
         index: PropTypes.number
     }
 
     constructor(props) {
         super(props)
         this.state = ({
+            ischeck: props.post_data.is_check,
+            pcheck: props.post_data.p_check,
             servername: props.post_data.server_name,
             jpname: props.post_data.jp_name,
             ipaddress: props.post_data.ip_address,
@@ -26,7 +29,7 @@ class ListContainer extends Component {
     }
 
     static defaultProps = {
-        servers: []
+        data: []
     }
 
     handleDeleteServer(index) {
@@ -37,6 +40,17 @@ class ListContainer extends Component {
         }
     }
 
+    handleIsCheckChange() {
+        this.setState({
+            ischeck: !this.state.ischeck
+        })
+    }
+
+    handlePCheckChange() {
+        this.setState({
+            pcheck: !this.state.pcheck
+        })
+    }
     /*handleEditServer(index) {
         if (this.props.onEditServer) {
             this.props.onEditServer(this.props.index)
@@ -81,27 +95,30 @@ class ListContainer extends Component {
     handleSubmit(index) {
         axios.post('/edit', {
             querymark: this.props.post_data._id,
+            ischeck: this.state.ischeck,
+            pcheck: this.state.pcheck,
             servername: this.state.servername,
             jpname: this.state.jpname,
             ipaddress: this.state.ipaddress,
             port: this.state.port,
             priority: this.state.priority
         }).then((response) => {
-            var new_data;
             if (response.data.success === false) {
                 alert("error")
+            } else if (this.props.post_data.priority == this.state.priority) {
+                /*console.log(this.props.post_data.ip_address)
+                    console.log(this.props.post_data)
+                    dispatch(onEditServer(index, {
+                //querymark: this.props.post_data._id,
+                servername: this.props.post_data.server_name,
+                jpname: this.props.post_data.jp_name,
+                ipaddress: this.props.post_data.ip_address,
+                port: this.props.post_data.port,
+                priority: this.props.post_data.priority,
+                id,
+                    }))*/
             } else {
                 //window.location.reload();
-                //console.log(this.props.post_data)
-                dispatch(onEditServer(index, {
-                    //querymark: this.props.post_data._id,
-                    servername: this.state.servername,
-                    jpname: this.state.jpname,
-                    ipaddress: this.state.ipaddress,
-                    port: this.state.port,
-                    priority: this.state.priority,
-                    id,
-                }))
             }
         }).catch(() => {
         })
@@ -130,11 +147,43 @@ class ListContainer extends Component {
         const {open} = this.state
         const post_data = this.props.post_data
         var updated_time = (new Date(post_data.updated_at)).toLocaleString().replace('/T/', '').replace('/\../+', '')
-        var state_color = (post_data.state == "green") ? "green" : "red"
-        var icon_name = (post_data.state == "green") ? "smile" : "warning sign"
+        var port_state_color = function() {
+            if (post_data.port_state == "green") {
+                return "green"
+            } else if (post_data.port_state == "red") {
+                return "red"
+            } else
+                return "yellow"
+        }()
+        var port_icon_name = function() {
+            if (post_data.port_state == "green") {
+                return "smile"
+            } else if (post_data.port_state == "red") {
+                return "warning sign"
+            } else
+                return "minus circle"
+        }()
+        var ping_state_color = function() {
+            if (post_data.ping_state == "green") {
+                return "green"
+            } else if (post_data.ping_state == "red") {
+                return "red"
+            } else
+                return "yellow"
+        }()
+        var ping_icon_name = function() {
+            if (post_data.ping_state == "green") {
+                return "smile"
+            } else if (post_data.ping_state == "red") {
+                return "warning sign"
+            } else
+                return "minus circle"
+        }()
+
         return (
             <Table.Row>
-            <Table.Cell><Icon name={icon_name} color={state_color}/></Table.Cell>
+            <Table.Cell><Icon name={port_icon_name} color={port_state_color}/></Table.Cell>
+            <Table.Cell><Icon name={ping_icon_name} color={ping_state_color}/></Table.Cell>
             <Table.Cell>{post_data.jp_name}</Table.Cell>
             <Table.Cell>{post_data.ip_address}</Table.Cell>
             <Table.Cell>{post_data.port}</Table.Cell>
@@ -214,44 +263,53 @@ class ListContainer extends Component {
     renderOpen() {
         const {open} = this.state
         const post_data = this.props.post_data
-        var updated_time = (new Date(post_data.updated_at)).toLocaleString().replace('/T/', '').replace('/\../+', '')
+        //var updated_time = (new Date(post_data.updated_at)).toLocaleString().replace('/T/', '').replace('/\../+', '')
         //var state_color = (post_data.state == "green") ? "green" : "red"
         //var icon_name = (post_data.state == "green") ? "smile" : "warning sign"
         return (
             <Table.Row>
             <Table.Cell>
-            <Input size='small' placeholder={this.state.servername} onChange={(e) => {
+                <Checkbox name="pCheck" label='Port Check' checked={this.state.pcheck} onChange={this.handlePCheckChange.bind(this)} />
+            </Table.Cell>
+            <Table.Cell>
+                <Checkbox name="isCheck" label='Ping Check' checked={this.state.ischeck} onChange={this.handleIsCheckChange.bind(this)} />
+            </Table.Cell>
+            <Table.Cell>
+            <Input size='small' value={this.state.servername} onChange={(e) => {
                 this.setState({
                     servername: e.target.value
                 })
             }}/>
             </Table.Cell>
             <Table.Cell>
-            <Input size='small' placeholder={this.state.jpname} onChange={(e) => {
+            <Input size='small' value={this.state.jpname} onChange={(e) => {
                 this.setState({
                     jpname: e.target.value
                 })
             }}/>
             </Table.Cell>
             <Table.Cell>
-            <Input size='small' placeholder={this.state.ipaddress} onChange={(e) => {
+            <Input size='small' style={{
+                width: '10em'
+            }} value={this.state.ipaddress} onChange={(e) => {
                 this.setState({
                     ipaddress: e.target.value
                 })
             }}/>
             </Table.Cell>
             <Table.Cell>
-            <Input size='small' placeholder={this.state.port} onChange={(e) => {
+            <Input size='small' style={{
+                width: '5em'
+            }} value={this.state.port} onChange={(e) => {
                 this.setState({
                     port: e.target.value
                 })
             }}/>
             </Table.Cell>
             <Table.Cell>
-            <Input size='small' disabled placeholder={updated_time} />
-            </Table.Cell>
-            <Table.Cell>
-            <Input size='small' placeholder={this.state.priority} onChange={(e) => {
+            <Input size='small' style={{
+                width: '5em'
+            }} value={this.state.priority} onChange={(e) => {
                 this.setState({
                     priority: e.target.value
                 })
@@ -269,21 +327,21 @@ class ListContainer extends Component {
                 })
             }}/>
             </Table.Cell>
-        </Table.Row>
+            </Table.Row>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        servers: state.servers
+        data: state.data
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onEditServer: (index, data) => {
-            dispatch(editServer(index, data))
+            dispatch(editState(index, data))
         },
     }
 }

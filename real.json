@@ -1,0 +1,441 @@
+{
+	"_id": {
+		"$oid": "59a8ba72942d900c1e72f7d6"
+	},
+	"ip_address": "192.168.5.20",
+	"is_check": true,
+	"p_check": true,
+	"port": 3389,
+	"server_name": "MATSUMOTO-CTI",
+	"jp_name": "発信規制　CTI(松本)",
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:07.389Z"
+	},
+	"created_at": {
+		"$date": "2017-09-01T01:40:02.988Z"
+	},
+	"__v": 0,
+	"email_sent": true,
+	"email_mark": false,
+	"priority": 3
+} {
+	"_id": {
+		"$oid": "59a8ba72942d900c1e72f7da"
+	},
+	"ip_address": "192.168.5.100",
+	"is_check": true,
+	"p_check": true,
+	"port": 80,
+	"server_name": "MATSUMOTO-MAIN",
+	"jp_name": "発信規制　主装置(松本)",
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:07.383Z"
+	},
+	"created_at": {
+		"$date": "2017-09-01T01:40:02.998Z"
+	},
+	"__v": 0,
+	"email_sent": true,
+	"email_mark": false,
+	"priority": 13
+} {
+	"_id": {
+		"$oid": "59a8ba73942d900c1e72f7df"
+	},
+	"ip_address": "192.168.7.100",
+	"is_check": true,
+	"p_check": true,
+	"port": 80,
+	"server_name": "KUMAMOTO-MAIN",
+	"jp_name": "発信規制　主装置(熊本)",
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:07.376Z"
+	},
+	"created_at": {
+		"$date": "2017-09-01T01:40:03.007Z"
+	},
+	"__v": 0,
+	"email_sent": true,
+	"email_mark": false,
+	"priority": 15
+} {
+	"_id": {
+		"$oid": "59a8ba72942d900c1e72f7d9"
+	},
+	"ip_address": "192.168.6.20",
+	"is_check": true,
+	"p_check": true,
+	"port": 3389,
+	"server_name": "KANAZAWA-CTI",
+	"jp_name": "発信規制　CTI(金沢)",
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:07.407Z"
+	},
+	"created_at": {
+		"$date": "2017-09-01T01:40:02.994Z"
+	},
+	"__v": 0,
+	"email_sent": true,
+	"email_mark": false,
+	"priority": 4
+} {
+	"_id": {
+		"$oid": "59a8ba73942d900c1e72f7de"
+	},
+	"ip_address": "192.168.6.100",
+	"is_check": true,
+	"p_check": true,
+	"port": 80,
+	"server_name": "KANAZAWA-MAIN",
+	"jp_name": "発信規制　主装置(金沢)",
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:07.401Z"
+	},
+	"created_at": {
+		"$date": "2017-09-01T01:40:03.005Z"
+	},
+	"__v": 0,
+	"email_sent": true,
+	"email_mark": false,
+	"priority": 14
+} {
+	"_id": {
+		"$oid": "59a8ba73942d900c1e72f7dc"
+	},
+	"ip_address": "192.168.1.100",
+	"is_check": true,
+	"p_check": true,
+	"port": 80,
+	"server_name": "MG-MAIN",
+	"jp_name": "発信規制　主装置(MG)",
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.097Z"
+	},
+	"created_at": {
+		"$date": "2017-09-01T01:40:03.000Z"
+	},
+	"__v": 0,
+	"email_sent": false,
+	"email_mark": false,
+	"priority": 10
+} {
+	"_id": {
+		"$oid": "59a8ba72942d900c1e72f7d4"
+	},
+	"ip_address": "192.168.1.20",
+	"is_check": true,
+	"p_check": true,
+	"port": 3389,
+	"server_name": "MG-CTI",
+	"jp_name": "発信規制　CTI(MG)",
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.098Z"
+	},
+	"created_at": {
+		"$date": "2017-09-01T01:40:02.948Z"
+	},
+	"__v": 0,
+	"email_sent": false,
+	"email_mark": false,
+	"priority": 0
+} {
+	"_id": {
+		"$oid": "59a8ba72942d900c1e72f7db"
+	},
+	"ip_address": "192.168.3.100",
+	"is_check": true,
+	"p_check": true,
+	"port": 80,
+	"server_name": "OSAKA-MAIN",
+	"jp_name": "発信規制　主装置(大阪)",
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.088Z"
+	},
+	"created_at": {
+		"$date": "2017-09-01T01:40:02.999Z"
+	},
+	"__v": 0,
+	"email_sent": false,
+	"email_mark": false,
+	"priority": 12
+} {
+	"_id": {
+		"$oid": "59a8ba72942d900c1e72f7d8"
+	},
+	"ip_address": "192.168.2.20",
+	"is_check": true,
+	"p_check": true,
+	"port": 3389,
+	"server_name": "JT-CTI",
+	"jp_name": "発信規制　CTI(JT)",
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.094Z"
+	},
+	"created_at": {
+		"$date": "2017-09-01T01:40:02.992Z"
+	},
+	"__v": 0,
+	"email_sent": false,
+	"email_mark": false,
+	"priority": 1
+} {
+	"_id": {
+		"$oid": "59a8ba73942d900c1e72f7dd"
+	},
+	"ip_address": "192.168.7.20",
+	"is_check": true,
+	"p_check": true,
+	"port": 3389,
+	"server_name": "KUMAMOTO-CTI",
+	"jp_name": "発信規制　CTI(熊本)",
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:07.394Z"
+	},
+	"created_at": {
+		"$date": "2017-09-01T01:40:03.003Z"
+	},
+	"__v": 0,
+	"email_sent": true,
+	"email_mark": false,
+	"priority": 5
+} {
+	"_id": {
+		"$oid": "59e7fd6d47d6400d976afdcb"
+	},
+	"server_name": "OSAKA-CTI",
+	"jp_name": "発信規制　CTI(大阪)",
+	"ip_address": "192.168.3.20",
+	"is_check": true,
+	"p_check": true,
+	"port": 3389,
+	"port_state": "green",
+	"state": "green",
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.092Z"
+	},
+	"created_at": {
+		"$date": "2017-10-19T01:18:37.753Z"
+	},
+	"email_sent": false,
+	"email_mark": false,
+	"priority": 2,
+	"__v": 0
+} {
+	"_id": {
+		"$oid": "59f2cffaafc77d1678c45c96"
+	},
+	"server_name": "JT-MAIN",
+	"jp_name": "発信規制　主装置(JT)",
+	"ip_address": "192.168.2.100",
+	"is_check": true,
+	"p_check": true,
+	"priority": 11,
+	"email_sent": false,
+	"email_mark": false,
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.095Z"
+	},
+	"created_at": {
+		"$date": "2017-10-27T06:19:38.503Z"
+	},
+	"port_state": "green",
+	"state": "green",
+	"port": 80,
+	"__v": 0
+} {
+	"_id": {
+		"$oid": "59f2d038afc77d1678c45cab"
+	},
+	"server_name": "Baibai-MAIN",
+	"jp_name": "発信規制　主装置(売買チーム専用)",
+	"ip_address": "192.168.1.110",
+	"is_check": true,
+	"p_check": true,
+	"priority": 17,
+	"email_sent": false,
+	"email_mark": false,
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.098Z"
+	},
+	"created_at": {
+		"$date": "2017-10-27T06:20:40.671Z"
+	},
+	"port_state": "green",
+	"state": "green",
+	"port": 80,
+	"__v": 0
+} {
+	"_id": {
+		"$oid": "59f2d0e5afc77d1678c45ce2"
+	},
+	"server_name": "Tel_Syncer",
+	"jp_name": "発信規制　Tel_Syncer",
+	"ip_address": "192.168.1.5",
+	"is_check": true,
+	"p_check": true,
+	"priority": 50,
+	"email_sent": false,
+	"email_mark": false,
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.099Z"
+	},
+	"created_at": {
+		"$date": "2017-10-27T06:23:33.644Z"
+	},
+	"port_state": "green",
+	"state": "green",
+	"port": 80,
+	"__v": 0
+} {
+	"_id": {
+		"$oid": "59f2d15bafc77d1678c45d04"
+	},
+	"server_name": "fx_pro_tick_1",
+	"jp_name": "fx pro tick外部サーバー",
+	"ip_address": "133.242.102.167",
+	"is_check": true,
+	"p_check": true,
+	"priority": 61,
+	"email_sent": false,
+	"email_mark": false,
+	"updated_at": {
+		"$date": "2017-10-30T04:35:07.414Z"
+	},
+	"created_at": {
+		"$date": "2017-10-27T06:25:31.482Z"
+	},
+	"port_state": "green",
+	"state": "green",
+	"port": 3389,
+	"__v": 0
+} {
+	"_id": {
+		"$oid": "59f2d177afc77d1678c45d05"
+	},
+	"server_name": "fx_pro_tick_2",
+	"jp_name": "fx pro tick内部サーバー",
+	"ip_address": "192.168.1.17",
+	"is_check": true,
+	"p_check": true,
+	"priority": 62,
+	"email_sent": false,
+	"email_mark": false,
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.101Z"
+	},
+	"created_at": {
+		"$date": "2017-10-27T06:25:59.865Z"
+	},
+	"port_state": "green",
+	"state": "green",
+	"port": 80,
+	"__v": 0
+} {
+	"_id": {
+		"$oid": "59f2d194afc77d1678c45d16"
+	},
+	"server_name": "DC #1",
+	"jp_name": "DC #1",
+	"ip_address": "192.168.2.2",
+	"is_check": true,
+	"p_check": true,
+	"priority": 100,
+	"email_sent": false,
+	"email_mark": false,
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.095Z"
+	},
+	"created_at": {
+		"$date": "2017-10-27T06:26:28.408Z"
+	},
+	"port_state": "green",
+	"state": "green",
+	"port": 3389,
+	"__v": 0
+} {
+	"_id": {
+		"$oid": "59f2d1a0afc77d1678c45d17"
+	},
+	"server_name": "DC #2",
+	"jp_name": "DC #2",
+	"ip_address": "192.168.1.2",
+	"is_check": true,
+	"p_check": true,
+	"priority": 101,
+	"email_sent": false,
+	"email_mark": false,
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.103Z"
+	},
+	"created_at": {
+		"$date": "2017-10-27T06:26:40.537Z"
+	},
+	"port_state": "green",
+	"state": "green",
+	"port": 3389,
+	"__v": 0
+} {
+	"_id": {
+		"$oid": "59f2d1b5afc77d1678c45d18"
+	},
+	"server_name": "FILE-SERVER",
+	"jp_name": "ファイルサーバー",
+	"ip_address": "192.168.1.6",
+	"is_check": true,
+	"p_check": true,
+	"priority": 102,
+	"email_sent": false,
+	"email_mark": false,
+	"updated_at": {
+		"$date": "2017-10-30T04:35:00.102Z"
+	},
+	"created_at": {
+		"$date": "2017-10-27T06:27:01.136Z"
+	},
+	"port_state": "green",
+	"state": "green",
+	"port": 3389,
+	"__v": 0
+} {
+	"_id": {
+		"$oid": "59f6990c808d14159a57f2e8"
+	},
+	"server_name": "AWS sakura",
+	"jp_name": "AWS sakura",
+	"ip_address": "13.112.214.197",
+	"is_check": true,
+	"p_check": true,
+	"priority": 103,
+	"email_sent": true,
+	"email_mark": false,
+	"updated_at": {
+		"$date": "2017-10-30T04:35:04.065Z"
+	},
+	"created_at": {
+		"$date": "2017-10-30T03:14:20.424Z"
+	},
+	"port_state": "green",
+	"state": "green",
+	"port": 22,
+	"__v": 0
+}

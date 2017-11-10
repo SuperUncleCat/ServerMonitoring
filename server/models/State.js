@@ -5,6 +5,14 @@ var stateSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    is_check: {
+        type: Boolean,
+        default: true
+    },
+    p_check: {
+        type: Boolean,
+        default: true
+    },
     port: {
         type: Number,
         default: 80
@@ -17,7 +25,12 @@ var stateSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    state: {
+    port_state: {
+        type: String,
+        required: true,
+        default: "green"
+    },
+    ping_state: {
         type: String,
         required: true,
         default: "green"
@@ -31,6 +44,10 @@ var stateSchema = mongoose.Schema({
         default: Date.now
     },
     email_sent: {
+        type: Boolean,
+        default: false
+    },
+    email_mark: {
         type: Boolean,
         default: false
     },

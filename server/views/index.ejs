@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta Http-Equiv="Cache-Control" Content="no-cache">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
     <title>Server Monitoring</title>
   </head>
   <body>
     <div id="root"><%- renderView %></div>
-    <script>
+    <script type="text/javascript" charset="utf-8">
       try {
-        window.__REDUX_STATE__ = JSON.parse('<%- JSON.stringify(reduxData) %>');
+        window.__REDUX_STATE__ = '<%- JSON.stringify(reduxData) %>';
       } catch (e) {
         console.warn('error in getting server redux data');
       }
     </script>
-    <script src="./react-redux.bundle.js"></script>
-    <script src="./main.bundle.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/vendors.bundle.js"></script>
+    <script src="/app.bundle.js"></script>
   </body>
 </html>

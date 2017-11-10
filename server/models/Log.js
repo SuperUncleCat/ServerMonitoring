@@ -17,7 +17,11 @@ var logSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    state: {
+    port_state: {
+        type: String,
+        required: true
+    },
+    ping_state: {
         type: String,
         required: true
     },

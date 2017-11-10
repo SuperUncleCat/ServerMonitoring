@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Container, Loader, Table, Grid, Icon, Button, Modal, Form } from 'semantic-ui-react'
+import { withRouter } from 'react-router'
+import { Container, Loader, Table, Grid, Icon, Button, Modal, Form, Checkbox } from 'semantic-ui-react'
 import SegmentList from '../components/SegmentContainer'
-import { initServers, deleteServer, editServer } from '../reducers/reducer'
-import MenuFix from '../components/Menu'
+import { initState, deleteState, addState } from '../reducers/reducer'
 const axios = require('axios')
 
 class SegmentContainer extends Component {
     static propTypes = {
-        servers: PropTypes.array,
-        initServers: PropTypes.func,
+        data: PropTypes.array,
+        onInitServers: PropTypes.func,
         onDeleteServer: PropTypes.func,
         onAddServer: PropTypes.func
     }
@@ -19,9 +19,12 @@ class SegmentContainer extends Component {
         super()
         //this._loadData()
         this.state = {
+            ischeck: true,
+            pcheck: true,
             servername: '',
             jpname: '',
             ipaddress: '',
+            port: '',
             priority: ''
         }
     }
@@ -36,14 +39,59 @@ class SegmentContainer extends Component {
         }
         this.timer = setInterval(() => {
             this._loadData()
-        }, 2000)
+        }, 3000)
     }
 
     componentWillUnmount() {
         clearInterval(this.timer)
     }
 
+
     _loadData() {
+        if (!Object.keys) {
+            Object.keys = ( function() {
+                'use strict';
+                var hasOwnProperty = Object.prototype.hasOwnProperty,
+                    hasDontEnumBug = !({
+                            toString: null
+                        }).propertyIsEnumerable('toString'),
+                    dontEnums = [
+                        'toString',
+                        'toLocaleString',
+                        'valueOf',
+                        'hasOwnProperty',
+                        'isPrototypeOf',
+                        'propertyIsEnumerable',
+                        'constructor'
+                    ],
+                    dontEnumsLength = dontEnums.length;
+
+                return function(obj) {
+                    if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
+                        throw new TypeError('Object.keys called on non-object');
+                    }
+
+                    var result = [],
+                        prop,
+                        i;
+
+                    for (prop in obj) {
+                        if (hasOwnProperty.call(obj, prop)) {
+                            result.push(prop);
+                        }
+                    }
+
+                    if (hasDontEnumBug) {
+                        for (i = 0; i < dontEnumsLength; i++) {
+                            if (hasOwnProperty.call(obj, dontEnums[i])) {
+                                result.push(dontEnums[i]);
+                            }
+                        }
+                    }
+                    return result;
+                };
+            }());
+        }
         let sorted_data = [];
         let posts_data = [];
         let response = axios.post('/show')
@@ -64,7 +112,7 @@ class SegmentContainer extends Component {
                     posts_data.push(item);
                 })
                 posts_data.sort(_dataCompare);
-                this.props.initServers(posts_data)
+                this.props.onInitServers(posts_data)
             //dispatch(initServers(posts_data))
             }).catch(() => {
         })
@@ -72,20 +120,27 @@ class SegmentContainer extends Component {
     }
 
     handleDeleteServer(index) {
-        const {servers} = this.props
+        const {data} = this.props
         axios.post('/delete', {
-            id: servers[index]._id
+            id: data[index]._id
         }).then((response) => {
             if (response.data.success === false) {
                 alert("error");
+            } else if (data[index].priority !== data[data.length - 1].priority) {
+                if (this.props.onDeleteServer) {
+                    this.props.onDeleteServer(index)
+                }
+                window.location.reload()
             } else {
-                //window.location.reload();
+                if (this.props.onDeleteServer) {
+                    this.props.onDeleteServer(index)
+                }
+            //window.location.reload();
             }
         }).catch(() => {
         })
-        if (this.props.onDeleteServer) {
-            this.props.onDeleteServer(index)
-        }
+
+    //window.location.reload();
     }
 
     /*handleEditServer(index) {
@@ -119,29 +174,47 @@ class SegmentContainer extends Component {
     }*/
 
     handleCreate(server) {
+        const {data} = this.props
         axios.post('/create', {
             servername: this.state.servername,
             jpname: this.state.jpname,
             ipaddress: this.state.ipaddress,
+            ischeck: this.state.ischeck,
+            pcheck: this.state.pcheck,
             port: this.state.port,
             priority: this.state.priority
         }).then((response) => {
             if (response.data.success === false) {
                 alert("error");
-            } else {
-                //window.location.reload()
-                dispatch(onAddServer(index, {
+            } else if (this.state.priority > data[data.length - 1].priority) {
+                /*dispatch(onAddServer(index, {
                     servername: this.state.servername,
                     jpname: this.state.jpname,
                     ipaddress: this.state.ipaddress,
+                    ischeck: this.state.ischeck,
                     port: this.state.port,
                     priority: this.state.priority
-                }))
+                }))*/
+            } else {
+                window.location.reload()
             }
         }).catch(() => {
         })
         this.setState({
             open: false
+        })
+    //window.location.reload();
+    }
+
+    handleIsCheckChange() {
+        this.setState({
+            ischeck: !this.state.ischeck
+        })
+    }
+
+    handlePCheckChange() {
+        this.setState({
+            pcheck: !this.state.pcheck
         })
     }
 
@@ -192,14 +265,13 @@ class SegmentContainer extends Component {
         const {open, size, dimmer} = this.state
         return (
             <Grid>
-            <MenuFix /> 
             <Container style = {{
-                marginTop: '6em'
+                marginTop: '6em',
             }}>
                 <Table unstackable size='small'>
                     <Table.Header>
                         <Table.Row>
-                        <Table.HeaderCell colSpan='8'>
+                        <Table.HeaderCell colSpan='9'>
                             <Button basic color='violet' floated='right' icon labelPosition='left' primary size='tiny' onClick={this.show('small', 'blurring')}>
                                 <Icon link color='violet' name='add' />Add
                             </Button>
@@ -233,6 +305,14 @@ class SegmentContainer extends Component {
                                     <label>Port</label>
                                     <input value={this.state.port} onChange={this.handlePORTChange.bind(this)} />
                                 </Form.Field>
+                                <Form.Field>
+                                    <label>PingCheck:</label>
+                                    <Checkbox name="isCheck" checked={this.state.ischeck} onChange={this.handleIsCheckChange.bind(this)} defaultChecked />
+                                </Form.Field>
+                                <Form.Field>
+                                    <label>PortCheck:</label>
+                                    <Checkbox name="pCheck" checked={this.state.pcheck} onChange={this.handlePCheckChange.bind(this)} defaultChecked />
+                                </Form.Field>
                                 </Form.Group>
                                 </Form>
                                 </Modal.Description>
@@ -247,7 +327,8 @@ class SegmentContainer extends Component {
                         </Table.HeaderCell>
                         </Table.Row>
                         <Table.Row>
-                            <Table.HeaderCell>State<Loader active inline size='small' /></Table.HeaderCell>
+                            <Table.HeaderCell>Port State<Loader active inline size='tiny' /></Table.HeaderCell>
+                            <Table.HeaderCell>Ping State<Loader active inline size='tiny' /></Table.HeaderCell>
                             <Table.HeaderCell>Server Name</Table.HeaderCell>
                             <Table.HeaderCell>IP Address</Table.HeaderCell>
                             <Table.HeaderCell>Port</Table.HeaderCell>
@@ -257,8 +338,8 @@ class SegmentContainer extends Component {
                             <Table.HeaderCell>Delete</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
-                    <SegmentList posts_data = {this.props.servers} onDeleteServer={this.handleDeleteServer.bind(this)} />
-                </Table>
+                    <SegmentList posts_data = {this.props.data} onDeleteServer={this.handleDeleteServer.bind(this)} />
+                </Table> 
             </Container>
             </Grid>
         )
@@ -267,20 +348,20 @@ class SegmentContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        servers: state.servers
+        data: state.data
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        initServers: (servers) => {
-            dispatch(initServers(servers))
+        onInitServers: (servers) => {
+            dispatch(initState(servers))
         },
         onDeleteServer: (index) => {
-            dispatch(deleteServer(index))
+            dispatch(deleteState(index))
         },
         onAddServer: (server) => {
-            dispatch(addServer(server))
+            dispatch(addState(server))
         }
     }
 }
