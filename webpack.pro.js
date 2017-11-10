@@ -6,7 +6,7 @@ const path = require('path')
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, 'client/app'),
+        app: ['babel-polyfill', path.resolve(__dirname, 'client/app')],
         vendors: [
             'react',
             'redux',

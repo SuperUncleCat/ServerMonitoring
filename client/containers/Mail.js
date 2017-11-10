@@ -15,31 +15,18 @@ class MailContainer extends Component {
 
     constructor() {
         super()
+        this._loadEmailData()
         this.state = {
             emailaddress: '',
             status: ''
         }
     }
 
-    componentWillMount() {
-        this._loadEmailData()
-    }
-
-    componentDidMount() {
-        if (this.timer) {
-            clearInterval(this.timer)
-        }
-        this.timer = setInterval(() => {
-            this._loadEmailData()
-        }, 10000)
-    }
-
     componentWillUnmount() {
-        clearInterval(this.timer)
         window.location.reload()
     }
 
-    _loadEmailData() {
+    async _loadEmailData() {
         if (!Object.keys) {
             Object.keys = ( function() {
                 'use strict';
@@ -86,7 +73,7 @@ class MailContainer extends Component {
         }
         let email_data = [];
         let email_posts_data = [];
-        let response = axios.post('/mailshow')
+        let response = await axios.post('/mailshow')
             .then((response) => {
                 Object.keys(response.data).forEach(function(index) {
                     email_data.push(response.data[index]);

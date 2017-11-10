@@ -17,7 +17,7 @@ class SegmentContainer extends Component {
 
     constructor() {
         super()
-        //this._loadData()
+        this._loadData()
         this.state = {
             ischeck: true,
             pcheck: true,
@@ -29,9 +29,9 @@ class SegmentContainer extends Component {
         }
     }
 
-    componentWillMount() {
+    /*componentWillMount() {
         this._loadData()
-    }
+    }*/
 
     componentDidMount() {
         if (this.timer) {
@@ -47,7 +47,7 @@ class SegmentContainer extends Component {
     }
 
 
-    _loadData() {
+    async _loadData() {
         if (!Object.keys) {
             Object.keys = ( function() {
                 'use strict';
@@ -94,7 +94,7 @@ class SegmentContainer extends Component {
         }
         let sorted_data = [];
         let posts_data = [];
-        let response = axios.post('/show')
+        let response = await axios.post('/show')
             .then((response) => {
                 Object.keys(response.data).forEach(function(index) {
                     sorted_data.push(response.data[index]);

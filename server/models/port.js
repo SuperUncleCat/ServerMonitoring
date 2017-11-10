@@ -34,7 +34,7 @@ var mailOptions_one = (element, address, port, email) => ({
 })
 
 var mailOptions_two = (element, address, email) => ({
-    from: '',
+    from: 'sysadmin@togo-sec.co.jp',
     to: email,
     subject: element + ' ' + 'server is down!',
     text: 'The' + ' ' + element + ' ' + 'with ip address of' + ' ' + address + ' ' + 'is not responding!'

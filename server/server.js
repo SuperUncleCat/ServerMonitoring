@@ -82,7 +82,6 @@ router.get('/', async(ctx, next) => {
         reduxData: preloadedState,
         renderView: staticMarkup
     })*/
-    ctx.body = 'ok'
     let context = {}
     await ctx.render('index', {
         reduxData: store.getState(),
