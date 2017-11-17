@@ -20,15 +20,17 @@ export default class SegmentList extends Component {
     }
 
     render() {
-        return (
-            <Table.Body>
-				{this.props.posts_data.map((post_data, i) => <ListContainer
-                post_data={post_data}
-                key={i}
-                index={i} onDeleteServer={this.handleDeleteServer.bind(this)} />
+        if (this.props.posts_data !== []) {
+            return (
+                <Table.Body>
+                {this.props.posts_data.map((post_data, i) => <ListContainer
+                    post_data={post_data}
+                    key={i}
+                    index={i} onDeleteServer={this.handleDeleteServer.bind(this)} />
 
-            )}
-      		</Table.Body>
-        )
+                )}
+            </Table.Body>
+            )
+        }
     }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
 import { Container, Loader, Table, Grid, Icon, Button, Modal, Form, Checkbox } from 'semantic-ui-react'
 import SegmentList from '../components/SegmentContainer'
 import { initState, deleteState, addState } from '../reducers/reducer'
@@ -18,7 +17,7 @@ class SegmentContainer extends Component {
     constructor() {
         super()
         //this._loadData()
-        this.state = {
+        /*this.state = {
             ischeck: true,
             pcheck: true,
             servername: '',
@@ -26,19 +25,25 @@ class SegmentContainer extends Component {
             ipaddress: '',
             port: '',
             priority: ''
+        }*/
+        this.state = {
+            data: {}
         }
+        this._loadData()
+    //this._loadData = this._loadData.bind(this)
     }
 
     componentWillMount() {
-        this._loadData()
+        //this._loadtest()
     }
 
     componentDidMount() {
-        /*if (this.timer) {
+        if (this.timer) {
             clearInterval(this.timer)
-        }*/
+        }
         this.timer = setInterval(() => {
-            this._loadData()
+            //this._loadData()
+            this._loadtest()
         }, 3000)
     }
 
@@ -46,95 +51,73 @@ class SegmentContainer extends Component {
         clearInterval(this.timer)
     }
 
-
-    async _loadData() {
-        if (!Object.keys) {
-            Object.keys = ( function() {
-                'use strict';
-                var hasOwnProperty = Object.prototype.hasOwnProperty,
-                    hasDontEnumBug = !({
-                            toString: null
-                        }).propertyIsEnumerable('toString'),
-                    dontEnums = [
-                        'toString',
-                        'toLocaleString',
-                        'valueOf',
-                        'hasOwnProperty',
-                        'isPrototypeOf',
-                        'propertyIsEnumerable',
-                        'constructor'
-                    ],
-                    dontEnumsLength = dontEnums.length;
-
-                return function(obj) {
-                    if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
-                        throw new TypeError('Object.keys called on non-object');
-                    }
-
-                    var result = [],
-                        prop,
-                        i;
-
-                    for (prop in obj) {
-                        if (hasOwnProperty.call(obj, prop)) {
-                            result.push(prop);
-                        }
-                    }
-
-                    if (hasDontEnumBug) {
-                        for (i = 0; i < dontEnumsLength; i++) {
-                            if (hasOwnProperty.call(obj, dontEnums[i])) {
-                                result.push(dontEnums[i]);
-                            }
-                        }
-                    }
-                    return result;
-                };
-            }());
-        }
+    async _loadtest() {
         let sorted_data = [];
         let posts_data = [];
-        let response = await axios.post('/show')
+        await axios.post('/show')
             .then((response) => {
                 Object.keys(response.data).forEach(function(index) {
                     sorted_data.push(response.data[index]);
                 })
 
-                function _dataCompare(a, b) {
+                sorted_data.forEach((item, index) => {
+                    posts_data.push(item);
+                })
+
+                this.setState({
+                    data: posts_data
+                })
+            }).catch((e) => {
+
+        })
+    }
+
+    _loadData() {
+        let sorted_data = [];
+        let posts_data = [];
+        let response = axios.post('/show')
+            .then((response) => {
+                Object.keys(response.data).forEach(function(index) {
+                    sorted_data.push(response.data[index]);
+                })
+
+                /*function _dataCompare(a, b) {
                     if (a.priority > b.priority)
                         return 1;
                     if (a.priority < b.priority)
                         return -1;
                     return 0;
-                }
+                }*/
 
                 sorted_data.forEach((item, index) => {
                     posts_data.push(item);
                 })
-                posts_data.sort(_dataCompare);
-                this.props.onInitServers(posts_data)
-            //dispatch(initServers(posts_data))
+                //posts_data.sort(_dataCompare);
+                //this.props.onInitServers(posts_data)
+                this.setState({
+                    data: posts_data
+                })
             }).catch((e) => {
-            console.log(e)
+
         })
 
     }
 
     handleDeleteServer(index) {
-        const {data} = this.props
+        const {data} = this.state
         axios.post('/delete', {
             id: data[index]._id
         }).then((response) => {
             if (response.data.success === false) {
                 alert("error");
             } else if (data[index].priority !== data[data.length - 1].priority) {
-                if (this.props.onDeleteServer) {
-                    this.props.onDeleteServer(index)
+                if (this.state.onDeleteServer) {
+                    this.state.onDeleteServer(index)
                 }
                 window.location.reload()
             } else {
-                if (this.props.onDeleteServer) {
-                    this.props.onDeleteServer(index)
+                if (this.state.onDeleteServer) {
+                    this.state.onDeleteServer(index)
                 }
             //window.location.reload();
             }
@@ -174,9 +157,9 @@ class SegmentContainer extends Component {
         })
     }*/
 
-    handleCreate(server) {
-        const {data} = this.props
-        axios.post('/create', {
+    async handleCreate(server) {
+        const {data} = this.state
+        await axios.post('/create', {
             servername: this.state.servername,
             jpname: this.state.jpname,
             ipaddress: this.state.ipaddress,
@@ -193,6 +176,7 @@ class SegmentContainer extends Component {
                     jpname: this.state.jpname,
                     ipaddress: this.state.ipaddress,
                     ischeck: this.state.ischeck,
+                    pcheck: this.state.pcheck,
                     port: this.state.port,
                     priority: this.state.priority
                 }))*/
@@ -264,11 +248,28 @@ class SegmentContainer extends Component {
 
     render() {
         const {open, size, dimmer} = this.state
-        return (
-            <Grid>
+        const data = this.state.data
+        var predata = []
+        var mark
+        Object.keys(data).forEach(function(index) {
+            if (data[index].ip_address) {
+                mark = true
+            } else {
+                mark = false
+            }
+        })
+        if (mark) {
+            data.forEach((item, index) => {
+                predata.push(item)
+            })
+        } else {
+        }
+        if (mark) {
+            return (
+                <Grid>
             <Container style = {{
-                marginTop: '6em',
-            }}>
+                    marginTop: '6em',
+                }}>
                 <Table unstackable size='small'>
                     <Table.Header>
                         <Table.Row>
@@ -328,9 +329,9 @@ class SegmentContainer extends Component {
                         </Table.HeaderCell>
                         </Table.Row>
                         <Table.Row>
-                            <Table.HeaderCell>Port State<Loader active inline size='tiny' /></Table.HeaderCell>
-                            <Table.HeaderCell>Ping State<Loader active inline size='tiny' /></Table.HeaderCell>
-                            <Table.HeaderCell>Server Name</Table.HeaderCell>
+                            <Table.HeaderCell>PortState<Loader active inline size='tiny' /></Table.HeaderCell>
+                            <Table.HeaderCell>PingState<Loader active inline size='tiny' /></Table.HeaderCell>
+                            <Table.HeaderCell>ServerName</Table.HeaderCell>
                             <Table.HeaderCell>IP Address</Table.HeaderCell>
                             <Table.HeaderCell>Port</Table.HeaderCell>
                             <Table.HeaderCell>Updated</Table.HeaderCell>
@@ -339,11 +340,94 @@ class SegmentContainer extends Component {
                             <Table.HeaderCell>Delete</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
-                    <SegmentList posts_data = {this.props.data} onDeleteServer={this.handleDeleteServer.bind(this)} />
+                    <SegmentList posts_data = {this.state.data} onDeleteServer={this.handleDeleteServer.bind(this)} />
                 </Table> 
             </Container>
             </Grid>
-        )
+            )
+        } else {
+            return (
+                <Grid>
+            <Container style = {{
+                    marginTop: '6em',
+                }}>
+                <Table unstackable size='small'>
+                    <Table.Header>
+                        <Table.Row>
+                        <Table.HeaderCell colSpan='9'>
+                            <Button basic color='violet' floated='right' icon labelPosition='left' primary size='tiny' onClick={this.show('small', 'blurring')}>
+                                <Icon link color='violet' name='add' />Add
+                            </Button>
+                            <Modal size={size} dimmer={dimmer} open={open} onClose={this.close} closeIcon>
+                            <Modal.Header>Add</Modal.Header>
+                            <Modal.Content>
+                                <Modal.Description>
+                                    <Form>
+                                <Form.Group width='equal'>
+                                <Form.Field>
+                                    <label>Server Name</label>
+                                    <input value={this.state.servername} onChange={this.handleServerNameChange.bind(this)} />
+                                </Form.Field>
+                                <Form.Field>
+                                    <label>JP Name</label>
+                                    <input value={this.state.jpname} onChange={this.handleJPNameChange.bind(this)} />
+                                </Form.Field>
+                                </Form.Group>
+                                <Form.Group width='equal'>
+                                <Form.Field>
+                                    <label>IP Address</label>
+                                    <input value={this.state.ipaddress} onChange={this.handleIPChange.bind(this)} />
+                                </Form.Field>
+                                <Form.Field>
+                                    <label>Priority</label>
+                                    <input value={this.state.priority} onChange={this.handlePriorityChange.bind(this)} />
+                                </Form.Field>
+                                </Form.Group>
+                                <Form.Group>
+                                <Form.Field>
+                                    <label>Port</label>
+                                    <input value={this.state.port} onChange={this.handlePORTChange.bind(this)} />
+                                </Form.Field>
+                                <Form.Field>
+                                    <label>PingCheck:</label>
+                                    <Checkbox name="isCheck" checked={this.state.ischeck} onChange={this.handleIsCheckChange.bind(this)} defaultChecked />
+                                </Form.Field>
+                                <Form.Field>
+                                    <label>PortCheck:</label>
+                                    <Checkbox name="pCheck" checked={this.state.pcheck} onChange={this.handlePCheckChange.bind(this)} defaultChecked />
+                                </Form.Field>
+                                </Form.Group>
+                                </Form>
+                                </Modal.Description>
+                            </Modal.Content>
+                            <Modal.Actions>
+                                <Button color='black' onClick={this.close}>
+                                    Nope
+                                </Button>
+                                <Button positive icon='checkmark' labelPosition='right' content="Submit" onClick={this.handleCreate.bind(this)} />
+                            </Modal.Actions>
+                            </Modal>
+                        </Table.HeaderCell>
+                        </Table.Row>
+                        <Table.Row>
+                            <Table.HeaderCell>PortState<Loader active inline size='tiny' /></Table.HeaderCell>
+                            <Table.HeaderCell>PingState<Loader active inline size='tiny' /></Table.HeaderCell>
+                            <Table.HeaderCell>ServerName</Table.HeaderCell>
+                            <Table.HeaderCell>IP Address</Table.HeaderCell>
+                            <Table.HeaderCell>Port</Table.HeaderCell>
+                            <Table.HeaderCell>Updated</Table.HeaderCell>
+                            <Table.HeaderCell>Priority</Table.HeaderCell>
+                            <Table.HeaderCell>Edit</Table.HeaderCell>
+                            <Table.HeaderCell>Delete</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <SegmentList posts_data = {predata} onDeleteServer={this.handleDeleteServer.bind(this)} />
+                </Table> 
+            </Container>
+            </Grid>
+            )
+        }
+
     }
 }
 

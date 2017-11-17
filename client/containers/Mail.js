@@ -23,7 +23,7 @@ class MailContainer extends Component {
     }
 
     componentWillUnmount() {
-        window.location.reload()
+        //window.location.reload()
     }
 
     async _loadEmailData() {

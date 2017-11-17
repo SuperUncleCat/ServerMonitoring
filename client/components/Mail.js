@@ -20,15 +20,17 @@ export default class MailComponent extends Component {
     }
 
     render() {
-        return (
-            <Table.Body>
+        if (this.props.mail_data !== []) {
+            return (
+                <Table.Body>
                 {this.props.mail_data.map((post_data, i) => <MailList
-                email_post_data={post_data}
-                key={i}
-                index={i} onDelEmail={this.handleDeleteEmail.bind(this)} />
+                    email_post_data={post_data}
+                    key={i}
+                    index={i} onDelEmail={this.handleDeleteEmail.bind(this)} />
 
-            )}
+                )}
             </Table.Body>
-        )
+            )
+        }
     }
 }

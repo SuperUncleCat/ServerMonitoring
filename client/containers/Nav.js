@@ -85,9 +85,7 @@ class Nav extends Component {
             <Menu fixed='top' size='large' inverted>
                 <Menu.Item name='Server Monitoring' header />
                 <Menu.Item as={Link} to='/' name='Home' active={activeItem === 'Home'} onClick={this.handleItemClick} />
-                <Menu.Item as={Link} to='/list' name='List' active={activeItem === 'List'} onClick={() => {
-                console.log("Hi")
-            }} />
+                <Menu.Item as={Link} to='/list' name='List' active={activeItem === 'List'} onClick={this.handleItemClick} />
                 <Menu.Item><Button primary onClick={this.show('small')}>Email</Button></Menu.Item>
                 <Modal size={size} open={open} onClose={this.close}>
                 <Modal.Header>

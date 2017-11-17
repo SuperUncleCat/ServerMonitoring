@@ -98,35 +98,34 @@ router.get('/', async(ctx, next) => {
 
 router.post('/show', async(ctx, next) => {
 
-    ctx.body = 'ok'
+    //ctx.body = 'ok'
+    let newArray = [];
     await State.find({}, function(err, doc) {
-        let newArray = [];
         if (err) {
             return;
         }
         doc.forEach(function(element, index) {
             newArray.push(element);
         })
-        ctx.response.body = JSON.stringify(newArray);
+        ctx.body = JSON.stringify(newArray);
+    }).sort({
+        priority: 1
     })
-
 })
 
 
 router.post('/mailshow', async(ctx, next) => {
 
-    ctx.body = 'ok';
+    let mailArray = [];
     await Email.find({}, function(err, doc) {
-        let mailArray = [];
         if (err) {
             return;
         }
         doc.forEach(function(element, index) {
             mailArray.push(element);
         })
-        ctx.response.body = JSON.stringify(mailArray);
     })
-
+    ctx.response.body = JSON.stringify(mailArray);
 })
 
 router.post('/edit', async(ctx, next) => {
@@ -141,6 +140,10 @@ router.post('/edit', async(ctx, next) => {
             ip_address: ctx.request.body.ipaddress,
             is_check: ctx.request.body.ischeck,
             p_check: ctx.request.body.pcheck,
+            count: ctx.request.body.count,
+            email_mark: ctx.request.body.emailmark,
+            email_sent: ctx.request.body.emailsent,
+            p_count: ctx.request.body.pcount,
             port: ctx.request.body.port,
             priority: ctx.request.body.priority
         }

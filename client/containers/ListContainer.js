@@ -97,6 +97,10 @@ class ListContainer extends Component {
             querymark: this.props.post_data._id,
             ischeck: this.state.ischeck,
             pcheck: this.state.pcheck,
+            count: 0,
+            pcount: 0,
+            emailmark: false,
+            emailsent: false,
             servername: this.state.servername,
             jpname: this.state.jpname,
             ipaddress: this.state.ipaddress,
@@ -179,16 +183,19 @@ class ListContainer extends Component {
             } else
                 return "minus circle"
         }()
-
+        var jp_name = post_data.jp_name
+        var ip_address = post_data.ip_address
+        var port = post_data.port
+        var priority = post_data.priority
         return (
             <Table.Row>
             <Table.Cell><Icon name={port_icon_name} color={port_state_color}/></Table.Cell>
             <Table.Cell><Icon name={ping_icon_name} color={ping_state_color}/></Table.Cell>
-            <Table.Cell>{post_data.jp_name}</Table.Cell>
-            <Table.Cell>{post_data.ip_address}</Table.Cell>
-            <Table.Cell>{post_data.port}</Table.Cell>
+            <Table.Cell>{jp_name}</Table.Cell>
+            <Table.Cell>{ip_address}</Table.Cell>
+            <Table.Cell>{port}</Table.Cell>
             <Table.Cell>{updated_time}</Table.Cell>
-            <Table.Cell>{post_data.priority}</Table.Cell>
+            <Table.Cell>{priority}</Table.Cell>
             <Table.Cell>
                 <div>
                     <Icon link name='settings' color='purple' onClick={() => {
@@ -199,7 +206,7 @@ class ListContainer extends Component {
                 </div>
             </Table.Cell>
             <Table.Cell><Icon link name='trash' color='purple' onClick={this.handleDeleteServer.bind(this)} /></Table.Cell>
-        </Table.Row>
+            </Table.Row>
         )
     /*return (
         <Table.Row>
@@ -269,13 +276,15 @@ class ListContainer extends Component {
         return (
             <Table.Row>
             <Table.Cell>
-                <Checkbox name="pCheck" label='Port Check' checked={this.state.pcheck} onChange={this.handlePCheckChange.bind(this)} />
+                <Checkbox name="pCheck" label='Port' checked={this.state.pcheck} onChange={this.handlePCheckChange.bind(this)} />
             </Table.Cell>
             <Table.Cell>
-                <Checkbox name="isCheck" label='Ping Check' checked={this.state.ischeck} onChange={this.handleIsCheckChange.bind(this)} />
+                <Checkbox name="isCheck" label='Ping' checked={this.state.ischeck} onChange={this.handleIsCheckChange.bind(this)} />
             </Table.Cell>
             <Table.Cell>
-            <Input size='small' value={this.state.servername} onChange={(e) => {
+            <Input style={{
+                width: '10em'
+            }} size='small' value={this.state.servername} onChange={(e) => {
                 this.setState({
                     servername: e.target.value
                 })
@@ -290,7 +299,7 @@ class ListContainer extends Component {
             </Table.Cell>
             <Table.Cell>
             <Input size='small' style={{
-                width: '10em'
+                width: '8em'
             }} value={this.state.ipaddress} onChange={(e) => {
                 this.setState({
                     ipaddress: e.target.value

@@ -18,8 +18,16 @@ var Log = mongoose.model("Log", logSchema);
 
 var session = ping.createSession();
 
+/*var transporter = nodemailer.createTransport(smtpTransport({
+    host: 'smtp.kagoya.net',
+    auth: {
+        user: 'kir080295.system',
+        pass: '1vmlbo45dm'
+    }
+}))*/
+
 var transporter = nodemailer.createTransport(smtpTransport({
-    host: '',
+    host: 'smtp.gmail.com',
     auth: {
         user: '',
         pass: ''
@@ -27,14 +35,14 @@ var transporter = nodemailer.createTransport(smtpTransport({
 }))
 
 var mailOptions_one = (element, address, port, email) => ({
-    from: '',
+    from: 'chickenruntest@gmail.com',
     to: email,
     subject: 'port of' + ' ' + port + ' ' + element + ' ' + 'server is down!',
     text: 'port of' + ' ' + port + ' ' + element + ' ' + address + ' ' + 'is not responding!'
 })
 
 var mailOptions_two = (element, address, email) => ({
-    from: '',
+    from: 'chickenruntest@gmail.com',
     to: email,
     subject: element + ' ' + 'server is down!',
     text: 'The' + ' ' + element + ' ' + 'with ip address of' + ' ' + address + ' ' + 'is not responding!'
@@ -65,6 +73,7 @@ var mission = schedule.scheduleJob(rule, function() {
                         }, {
                             "$set": {
                                 "port_state": "green",
+                                "count": 0,
                                 "email_mark": false
                             }
                         }, function(err, doc) {
@@ -76,6 +85,21 @@ var mission = schedule.scheduleJob(rule, function() {
                         sock.destroy();
                     }).on('error', function(e) {
                         console.log(element.ip_address + ':' + element.port + ' is down: ' + e.message);
+                    /*if (element.count < 2) {
+                        State.findOneAndUpdate({
+                            "_id": element._id,
+                        }, {
+                            "$set": {
+                                "count": element.count + 1
+                            }
+                        }, function(err, doc) {
+                            if (err) {
+                                console.log(err.toString());
+                            } else {
+
+                            }
+                        })
+                    } else {
                         if (element.email_mark !== true) {
                             Email.find({}, function(err, docs) {
                                 if (docs) {
@@ -119,58 +143,76 @@ var mission = schedule.scheduleJob(rule, function() {
 
                             }
                         })
+                    }*/
                     }).on('timeout', function(e) {
                         console.log(element.ip_address + ':' + element.port + ' is down: timeout');
-                        if (element.email_mark !== true) {
-                            Email.find({}, function(err, docs) {
-                                if (docs) {
-                                    docs.forEach((ele, num) => {
-                                        transporter.sendMail(mailOptions_one(element.jp_name, element.ip_address, element.port, ele.email_address), function(error, info) {
-                                            if (error) {
-                                                console.log(error);
-                                            } else {
-                                                console.log('Email sent: ' + info.response);
-                                            }
+                        if (element.count < 2) {
+                            State.findOneAndUpdate({
+                                "_id": element._id,
+                            }, {
+                                "$set": {
+                                    "count": element.count + 1
+                                }
+                            }, function(err, doc) {
+                                if (err) {
+                                    console.log(err.toString());
+                                } else {
+
+                                }
+                            })
+                        } else {
+                            if (element.email_mark !== true) {
+                                Email.find({}, function(err, docs) {
+                                    if (docs) {
+                                        docs.forEach((ele, num) => {
+                                            transporter.sendMail(mailOptions_one(element.jp_name, element.ip_address, element.port, ele.email_address), function(error, info) {
+                                                if (error) {
+                                                    console.log(error);
+                                                } else {
+                                                    console.log('Email sent: ' + info.response);
+                                                }
+                                            })
                                         })
-                                    })
+                                    }
+                                })
+                            }
+                            State.findOneAndUpdate({
+                                "_id": element._id,
+                            }, {
+                                "$set": {
+                                    "port_state": "red",
+                                    "email_mark": true
+                                }
+                            }, function(err, doc) {
+                                if (err) {
+                                    console.log(err.toString());
+                                } else {
+
+                                }
+                            })
+                            Log.create({
+                                "server_name": element.server_name,
+                                "jp_name": element.jp_name,
+                                "ip_address": element.ip_address,
+                                "port": element.port,
+                                "port_state": "red",
+                                "ping_state": element.ping_state
+                            }, function(err, doc) {
+                                if (err) {
+                                    console.log(err.toString());
+                                } else {
+
                                 }
                             })
                         }
-                        State.findOneAndUpdate({
-                            "_id": element._id,
-                        }, {
-                            "$set": {
-                                "port_state": "red",
-                                "email_mark": true
-                            }
-                        }, function(err, doc) {
-                            if (err) {
-                                console.log(err.toString());
-                            } else {
-
-                            }
-                        })
-                        Log.create({
-                            "server_name": element.server_name,
-                            "jp_name": element.jp_name,
-                            "ip_address": element.ip_address,
-                            "port": element.port,
-                            "port_state": "red",
-                            "ping_state": element.ping_state
-                        }, function(err, doc) {
-                            if (err) {
-                                console.log(err.toString());
-                            } else {
-
-                            }
-                        })
                     }).connect(element.port, element.ip_address)
                 } else {
                     State.findOneAndUpdate({
                         "_id": element._id
                     }, {
                         "$set": {
-                            "port_state": "yellow"
+                            "port_state": "yellow",
+                            "count": 0
                         }
                     }, function(err, doc) {
                         if (err) {
@@ -189,51 +231,66 @@ var mission = schedule.scheduleJob(rule, function() {
                         }
                         if (error) {
                             console.log(target + ": " + error.toString());
-                            if (element.email_sent !== true) {
-                                Email.find({}, function(err, docs) {
-                                    if (docs) {
-                                        docs.forEach((ele, num) => {
-                                            transporter.sendMail(mailOptions_two(element.jp_name, element.ip_address, ele.email_address), function(error, info) {
-                                                if (error) {
-                                                    console.log(error);
-                                                } else {
-                                                    console.log('Email sent: ' + info.response);
-                                                }
+                            if (element.p_count < 2) {
+                                State.findOneAndUpdate({
+                                    "_id": element._id,
+                                }, {
+                                    "$set": {
+                                        "p_count": element.p_count + 1
+                                    }
+                                }, function(err, doc) {
+                                    if (err) {
+                                        console.log(err.toString());
+                                    } else {
+
+                                    }
+                                })
+                            } else {
+                                if (element.email_sent !== true) {
+                                    Email.find({}, function(err, docs) {
+                                        if (docs) {
+                                            docs.forEach((ele, num) => {
+                                                transporter.sendMail(mailOptions_two(element.jp_name, element.ip_address, ele.email_address), function(error, info) {
+                                                    if (error) {
+                                                        console.log(error);
+                                                    } else {
+                                                        console.log('Email sent: ' + info.response);
+                                                    }
+                                                })
                                             })
-                                        })
+                                        }
+                                    })
+                                }
+
+                                State.findOneAndUpdate({
+                                    "_id": element._id,
+                                }, {
+                                    "$set": {
+                                        "ping_state": "red",
+                                        "email_sent": true
+                                    }
+                                }, function(err, doc) {
+                                    if (err) {
+                                        console.log(err.toString());
+                                    } else {
+
+                                    }
+                                })
+                                Log.create({
+                                    "server_name": element.server_name,
+                                    "jp_name": element.jp_name,
+                                    "ip_address": element.ip_address,
+                                    "port": element.port,
+                                    "port_state": element.port_state,
+                                    "ping_state": "red"
+                                }, function(err, doc) {
+                                    if (err) {
+                                        console.log(err.toString());
+                                    } else {
+
                                     }
                                 })
                             }
-
-                            State.findOneAndUpdate({
-                                "_id": element._id,
-                            }, {
-                                "$set": {
-                                    "ping_state": "red",
-                                    "email_sent": true
-                                }
-                            }, function(err, doc) {
-                                if (err) {
-                                    console.log(err.toString());
-                                } else {
-
-                                }
-                            })
-                            Log.create({
-                                "server_name": element.server_name,
-                                "jp_name": element.jp_name,
-                                "ip_address": element.ip_address,
-                                "port": element.port,
-                                "port_state": element.port_state,
-                                "ping_state": "red"
-                            }, function(err, doc) {
-                                if (err) {
-                                    console.log(err.toString());
-                                } else {
-
-                                }
-                            })
-
                         } else {
                             console.log(target + ": Alive(ms=" + ms + ")" + " " + new Date().toLocaleString().replace('/T/', '').replace('/\../+', ''));
                             State.findOneAndUpdate({
@@ -241,6 +298,7 @@ var mission = schedule.scheduleJob(rule, function() {
                             }, {
                                 "$set": {
                                     "ping_state": "green",
+                                    "p_count": 0,
                                     "email_sent": false
                                 }
                             }, function(err, doc) {
@@ -256,7 +314,8 @@ var mission = schedule.scheduleJob(rule, function() {
                         "_id": element._id
                     }, {
                         "$set": {
-                            "ping_state": "yellow"
+                            "ping_state": "yellow",
+                            "p_count": 0
                         }
                     }, function(err, doc) {
                         if (err) {

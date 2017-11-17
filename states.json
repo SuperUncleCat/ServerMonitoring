@@ -2,116 +2,128 @@
 	"_id": {
 		"$oid": "59a8ba72942d900c1e72f7d6"
 	},
+	"count": 0,
+	"p_count": 0,
 	"ip_address": "192.168.5.20",
-	"is_check": true,
-	"p_check": true,
+	"is_check": false,
+	"p_check": false,
 	"port": 3389,
 	"server_name": "MATSUMOTO-CTI",
 	"jp_name": "発信規制　CTI(松本)",
-	"port_state": "red",
-	"ping_state": "red",
+	"port_state": "yellow",
+	"ping_state": "yellow",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:07.389Z"
+		"$date": "2017-11-16T05:29:00.028Z"
 	},
 	"created_at": {
 		"$date": "2017-09-01T01:40:02.988Z"
 	},
 	"__v": 0,
 	"email_sent": true,
-	"email_mark": false,
+	"email_mark": true,
 	"priority": 3
 } {
 	"_id": {
 		"$oid": "59a8ba72942d900c1e72f7da"
 	},
+	"count": 0,
+	"p_count": 0,
 	"ip_address": "192.168.5.100",
-	"is_check": true,
-	"p_check": true,
+	"is_check": false,
+	"p_check": false,
 	"port": 80,
 	"server_name": "MATSUMOTO-MAIN",
 	"jp_name": "発信規制　主装置(松本)",
-	"port_state": "red",
-	"ping_state": "red",
+	"port_state": "yellow",
+	"ping_state": "yellow",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:07.383Z"
+		"$date": "2017-11-16T05:29:00.030Z"
 	},
 	"created_at": {
 		"$date": "2017-09-01T01:40:02.998Z"
 	},
 	"__v": 0,
 	"email_sent": true,
-	"email_mark": false,
+	"email_mark": true,
 	"priority": 13
 } {
 	"_id": {
 		"$oid": "59a8ba73942d900c1e72f7df"
 	},
+	"count": 0,
+	"p_count": 0,
 	"ip_address": "192.168.7.100",
-	"is_check": true,
-	"p_check": true,
+	"is_check": false,
+	"p_check": false,
 	"port": 80,
 	"server_name": "KUMAMOTO-MAIN",
 	"jp_name": "発信規制　主装置(熊本)",
-	"port_state": "red",
-	"ping_state": "red",
+	"port_state": "yellow",
+	"ping_state": "yellow",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:07.376Z"
+		"$date": "2017-11-16T05:29:00.031Z"
 	},
 	"created_at": {
 		"$date": "2017-09-01T01:40:03.007Z"
 	},
 	"__v": 0,
 	"email_sent": true,
-	"email_mark": false,
+	"email_mark": true,
 	"priority": 15
 } {
 	"_id": {
 		"$oid": "59a8ba72942d900c1e72f7d9"
 	},
+	"count": 0,
+	"p_count": 0,
 	"ip_address": "192.168.6.20",
-	"is_check": true,
-	"p_check": true,
+	"is_check": false,
+	"p_check": false,
 	"port": 3389,
 	"server_name": "KANAZAWA-CTI",
 	"jp_name": "発信規制　CTI(金沢)",
-	"port_state": "red",
-	"ping_state": "red",
+	"port_state": "yellow",
+	"ping_state": "yellow",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:07.407Z"
+		"$date": "2017-11-16T05:29:00.032Z"
 	},
 	"created_at": {
 		"$date": "2017-09-01T01:40:02.994Z"
 	},
 	"__v": 0,
 	"email_sent": true,
-	"email_mark": false,
+	"email_mark": true,
 	"priority": 4
 } {
 	"_id": {
 		"$oid": "59a8ba73942d900c1e72f7de"
 	},
+	"count": 0,
+	"p_count": 0,
 	"ip_address": "192.168.6.100",
-	"is_check": true,
-	"p_check": true,
+	"is_check": false,
+	"p_check": false,
 	"port": 80,
 	"server_name": "KANAZAWA-MAIN",
 	"jp_name": "発信規制　主装置(金沢)",
-	"port_state": "red",
-	"ping_state": "red",
+	"port_state": "yellow",
+	"ping_state": "yellow",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:07.401Z"
+		"$date": "2017-11-16T05:29:00.033Z"
 	},
 	"created_at": {
 		"$date": "2017-09-01T01:40:03.005Z"
 	},
 	"__v": 0,
 	"email_sent": true,
-	"email_mark": false,
+	"email_mark": true,
 	"priority": 14
 } {
 	"_id": {
 		"$oid": "59a8ba73942d900c1e72f7dc"
 	},
+	"count": 0,
+	"p_count": 0,
 	"ip_address": "192.168.1.100",
 	"is_check": true,
 	"p_check": true,
@@ -121,7 +133,7 @@
 	"port_state": "green",
 	"ping_state": "green",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.097Z"
+		"$date": "2017-11-16T05:29:00.106Z"
 	},
 	"created_at": {
 		"$date": "2017-09-01T01:40:03.000Z"
@@ -134,6 +146,8 @@
 	"_id": {
 		"$oid": "59a8ba72942d900c1e72f7d4"
 	},
+	"count": 0,
+	"p_count": 0,
 	"ip_address": "192.168.1.20",
 	"is_check": true,
 	"p_check": true,
@@ -143,7 +157,7 @@
 	"port_state": "green",
 	"ping_state": "green",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.098Z"
+		"$date": "2017-11-16T05:29:00.111Z"
 	},
 	"created_at": {
 		"$date": "2017-09-01T01:40:02.948Z"
@@ -156,6 +170,8 @@
 	"_id": {
 		"$oid": "59a8ba72942d900c1e72f7db"
 	},
+	"count": 0,
+	"p_count": 0,
 	"ip_address": "192.168.3.100",
 	"is_check": true,
 	"p_check": true,
@@ -165,7 +181,7 @@
 	"port_state": "green",
 	"ping_state": "green",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.088Z"
+		"$date": "2017-11-16T05:29:00.089Z"
 	},
 	"created_at": {
 		"$date": "2017-09-01T01:40:02.999Z"
@@ -178,6 +194,8 @@
 	"_id": {
 		"$oid": "59a8ba72942d900c1e72f7d8"
 	},
+	"count": 0,
+	"p_count": 0,
 	"ip_address": "192.168.2.20",
 	"is_check": true,
 	"p_check": true,
@@ -187,7 +205,7 @@
 	"port_state": "green",
 	"ping_state": "green",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.094Z"
+		"$date": "2017-11-16T05:29:00.093Z"
 	},
 	"created_at": {
 		"$date": "2017-09-01T01:40:02.992Z"
@@ -200,38 +218,42 @@
 	"_id": {
 		"$oid": "59a8ba73942d900c1e72f7dd"
 	},
+	"count": 0,
+	"p_count": 0,
 	"ip_address": "192.168.7.20",
-	"is_check": true,
-	"p_check": true,
+	"is_check": false,
+	"p_check": false,
 	"port": 3389,
 	"server_name": "KUMAMOTO-CTI",
 	"jp_name": "発信規制　CTI(熊本)",
-	"port_state": "red",
-	"ping_state": "red",
+	"port_state": "yellow",
+	"ping_state": "yellow",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:07.394Z"
+		"$date": "2017-11-16T05:29:00.035Z"
 	},
 	"created_at": {
 		"$date": "2017-09-01T01:40:03.003Z"
 	},
 	"__v": 0,
 	"email_sent": true,
-	"email_mark": false,
+	"email_mark": true,
 	"priority": 5
 } {
 	"_id": {
 		"$oid": "59e7fd6d47d6400d976afdcb"
 	},
+	"count": 0,
+	"p_count": 0,
 	"server_name": "OSAKA-CTI",
 	"jp_name": "発信規制　CTI(大阪)",
-	"ip_address": "192.168.3.20",
+	"ip_address": "192.168.3.22",
 	"is_check": true,
 	"p_check": true,
 	"port": 3389,
 	"port_state": "green",
 	"ping_state": "green",
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.092Z"
+		"$date": "2017-11-16T05:29:00.139Z"
 	},
 	"created_at": {
 		"$date": "2017-10-19T01:18:37.753Z"
@@ -244,6 +266,8 @@
 	"_id": {
 		"$oid": "59f2cffaafc77d1678c45c96"
 	},
+	"count": 0,
+	"p_count": 0,
 	"server_name": "JT-MAIN",
 	"jp_name": "発信規制　主装置(JT)",
 	"ip_address": "192.168.2.100",
@@ -253,7 +277,7 @@
 	"email_sent": false,
 	"email_mark": false,
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.095Z"
+		"$date": "2017-11-16T05:29:00.140Z"
 	},
 	"created_at": {
 		"$date": "2017-10-27T06:19:38.503Z"
@@ -266,21 +290,23 @@
 	"_id": {
 		"$oid": "59f2d038afc77d1678c45cab"
 	},
+	"count": 0,
+	"p_count": 0,
 	"server_name": "Baibai-MAIN",
 	"jp_name": "発信規制　主装置(売買チーム専用)",
 	"ip_address": "192.168.1.110",
 	"is_check": true,
-	"p_check": true,
+	"p_check": false,
 	"priority": 17,
 	"email_sent": false,
 	"email_mark": false,
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.098Z"
+		"$date": "2017-11-16T05:29:00.162Z"
 	},
 	"created_at": {
 		"$date": "2017-10-27T06:20:40.671Z"
 	},
-	"port_state": "green",
+	"port_state": "yellow",
 	"ping_state": "green",
 	"port": 80,
 	"__v": 0
@@ -288,6 +314,8 @@
 	"_id": {
 		"$oid": "59f2d0e5afc77d1678c45ce2"
 	},
+	"count": 0,
+	"p_count": 0,
 	"server_name": "Tel_Syncer",
 	"jp_name": "発信規制　Tel_Syncer",
 	"ip_address": "192.168.1.5",
@@ -297,7 +325,7 @@
 	"email_sent": false,
 	"email_mark": false,
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.099Z"
+		"$date": "2017-11-16T05:29:00.163Z"
 	},
 	"created_at": {
 		"$date": "2017-10-27T06:23:33.644Z"
@@ -310,21 +338,23 @@
 	"_id": {
 		"$oid": "59f2d15bafc77d1678c45d04"
 	},
+	"count": 0,
+	"p_count": 0,
 	"server_name": "fx_pro_tick_1",
 	"jp_name": "fx pro tick外部サーバー",
 	"ip_address": "133.242.102.167",
 	"is_check": true,
-	"p_check": true,
+	"p_check": false,
 	"priority": 61,
 	"email_sent": false,
-	"email_mark": false,
+	"email_mark": true,
 	"updated_at": {
-		"$date": "2017-10-30T04:35:07.414Z"
+		"$date": "2017-11-16T05:29:00.152Z"
 	},
 	"created_at": {
 		"$date": "2017-10-27T06:25:31.482Z"
 	},
-	"port_state": "red",
+	"port_state": "yellow",
 	"ping_state": "green",
 	"port": 3389,
 	"__v": 0
@@ -332,6 +362,8 @@
 	"_id": {
 		"$oid": "59f2d177afc77d1678c45d05"
 	},
+	"count": 0,
+	"p_count": 0,
 	"server_name": "fx_pro_tick_2",
 	"jp_name": "fx pro tick内部サーバー",
 	"ip_address": "192.168.1.17",
@@ -341,7 +373,7 @@
 	"email_sent": false,
 	"email_mark": false,
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.101Z"
+		"$date": "2017-11-16T05:29:00.164Z"
 	},
 	"created_at": {
 		"$date": "2017-10-27T06:25:59.865Z"
@@ -354,6 +386,8 @@
 	"_id": {
 		"$oid": "59f2d194afc77d1678c45d16"
 	},
+	"count": 0,
+	"p_count": 0,
 	"server_name": "DC #1",
 	"jp_name": "DC #1",
 	"ip_address": "192.168.2.2",
@@ -363,7 +397,7 @@
 	"email_sent": false,
 	"email_mark": false,
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.095Z"
+		"$date": "2017-11-16T05:29:00.141Z"
 	},
 	"created_at": {
 		"$date": "2017-10-27T06:26:28.408Z"
@@ -376,16 +410,18 @@
 	"_id": {
 		"$oid": "59f2d1a0afc77d1678c45d17"
 	},
+	"count": 0,
+	"p_count": 0,
 	"server_name": "DC #2",
 	"jp_name": "DC #2",
-	"ip_address": "192.168.1.2",
+	"ip_address": "192.168.1.4",
 	"is_check": true,
 	"p_check": true,
 	"priority": 101,
 	"email_sent": false,
 	"email_mark": false,
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.103Z"
+		"$date": "2017-11-16T05:29:00.167Z"
 	},
 	"created_at": {
 		"$date": "2017-10-27T06:26:40.537Z"
@@ -398,6 +434,8 @@
 	"_id": {
 		"$oid": "59f2d1b5afc77d1678c45d18"
 	},
+	"count": 0,
+	"p_count": 0,
 	"server_name": "FILE-SERVER",
 	"jp_name": "ファイルサーバー",
 	"ip_address": "192.168.1.6",
@@ -407,7 +445,7 @@
 	"email_sent": false,
 	"email_mark": false,
 	"updated_at": {
-		"$date": "2017-10-30T04:35:00.102Z"
+		"$date": "2017-11-16T05:29:00.167Z"
 	},
 	"created_at": {
 		"$date": "2017-10-27T06:27:01.136Z"
@@ -420,22 +458,48 @@
 	"_id": {
 		"$oid": "59f6990c808d14159a57f2e8"
 	},
+	"count": 0,
+	"p_count": 0,
 	"server_name": "AWS sakura",
 	"jp_name": "AWS sakura",
 	"ip_address": "13.112.214.197",
-	"is_check": true,
-	"p_check": true,
+	"is_check": false,
+	"p_check": false,
 	"priority": 103,
 	"email_sent": true,
 	"email_mark": false,
 	"updated_at": {
-		"$date": "2017-10-30T04:35:04.065Z"
+		"$date": "2017-11-16T05:29:00.038Z"
 	},
 	"created_at": {
 		"$date": "2017-10-30T03:14:20.424Z"
 	},
-	"port_state": "green",
-	"ping_state": "red",
+	"port_state": "yellow",
+	"ping_state": "yellow",
 	"port": 22,
+	"__v": 0
+} {
+	"_id": {
+		"$oid": "5a04163651c177168b91de88"
+	},
+	"count": 0,
+	"p_count": 0,
+	"server_name": "DC #0-aws",
+	"jp_name": "DC #0-aws",
+	"ip_address": "192.168.200.4",
+	"priority": 0,
+	"email_mark": false,
+	"email_sent": false,
+	"updated_at": {
+		"$date": "2017-11-16T05:29:00.145Z"
+	},
+	"created_at": {
+		"$date": "2017-11-09T08:47:50.337Z"
+	},
+	"ping_state": "green",
+	"port_state": "green",
+	"port": 3389,
+	"p_check": true,
+	"is_check": true,
 	"__v": 0
 }

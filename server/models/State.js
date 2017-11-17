@@ -51,6 +51,14 @@ var stateSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    count: {
+        type: Number,
+        default: 0
+    },
+    p_count: {
+        type: Number,
+        default: 0
+    },
     priority: {
         type: Number,
         default: 0
