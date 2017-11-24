@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 import { Provider } from 'react-redux'
 import { withRouter } from 'react-router'
 import { Menu, Modal, Button, Form, Table, Label, Icon } from 'semantic-ui-react'
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Link, Switch, Router } from 'react-router-dom'
 import SegmentContainer from './SegmentContainer'
 import MailContainer from './Mail'
 import { initState, addState, deleteState } from '../reducers/reducer'
+import { renderRoutes } from 'react-router-config'
 const axios = require('axios')
 
 class Nav extends Component {
@@ -114,8 +115,7 @@ class Nav extends Component {
                 </Modal>
             </Menu>
             <Switch>
-                <Route exact path='/' component={Home} />
-                <Route path='/list' component={List} />
+                {renderRoutes(this.props.route.routes)}
             </Switch>
             </div>
         )
@@ -132,6 +132,13 @@ const List = () => (
     <div>
         <MailContainer />
     </div>
+)
+
+const Save = () => (
+    <Switch>
+        <Route exact path='/' component={Home} />
+        <Route path='/list' component={List} />
+    </Switch>
 )
 
 const mapStateToProps = (state) => {

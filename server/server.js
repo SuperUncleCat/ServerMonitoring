@@ -31,6 +31,9 @@ const mission = require('./models/port')
 const port = process.env.PORT || config.port
 const store = configureStore()
 
+import { renderRoutes } from 'react-router-config'
+import routes from '../client/routes'
+
 mongoose.connect('mongodb://127.0.0.1:27017/monitor', {
     useMongoClient: true
 });
@@ -88,17 +91,19 @@ router.get('/', async(ctx, next) => {
         renderView: renderToString(
             <Provider store={store}>
                 <StaticRouter location={ctx.request.url} context={context}>
-                    <Nav />
+                    {renderRoutes(routes)}
                 </StaticRouter>
             </Provider>,
         )
-    })
+    });
 
 })
 
 router.post('/show', async(ctx, next) => {
 
     //ctx.body = 'ok'
+    if (ctx.status === 404) {
+    }
     let newArray = [];
     await State.find({}, function(err, doc) {
         if (err) {

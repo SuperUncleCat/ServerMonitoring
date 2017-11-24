@@ -29,7 +29,7 @@ var session = ping.createSession();
 var transporter = nodemailer.createTransport(smtpTransport({
     host: 'smtp.gmail.com',
     auth: {
-        user: '',
+        user: 'chickenruntest',
         pass: ''
     }
 }))

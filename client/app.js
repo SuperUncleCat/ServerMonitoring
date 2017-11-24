@@ -9,6 +9,8 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 import Nav from './containers/Nav'
 //const store = createStore(serversReducer, window.__REDUX_STATE__)
 const store = configureStore(window.__REDUX_STATE__)
+import routes from './routes'
+import { renderRoutes } from 'react-router-config'
 
 /*ReactDOM.render(
     <Provider store={store}>
@@ -21,7 +23,7 @@ const store = configureStore(window.__REDUX_STATE__)
 ReactDOM.render(
     <Provider store={store}>
     	<BrowserRouter>
-			<Nav />
+			{renderRoutes(routes)}
 		</BrowserRouter>
 	</Provider>,
     document.getElementById('root')

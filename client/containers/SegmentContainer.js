@@ -14,6 +14,10 @@ class SegmentContainer extends Component {
         onAddServer: PropTypes.func
     }
 
+    static fetchData(store) {
+        return store.dispatch(_loadData());
+    }
+
     constructor() {
         super()
         //this._loadData()
@@ -29,12 +33,13 @@ class SegmentContainer extends Component {
         this.state = {
             data: {}
         }
-        this._loadData()
+
     //this._loadData = this._loadData.bind(this)
     }
 
     componentWillMount() {
-        //this._loadtest()
+        this._loadData()
+    //this._loadtest()
     }
 
     componentDidMount() {
@@ -93,10 +98,11 @@ class SegmentContainer extends Component {
                     posts_data.push(item);
                 })
                 //posts_data.sort(_dataCompare);
-                //this.props.onInitServers(posts_data)
+                //this.state.onInitServers(posts_data)
                 this.setState({
                     data: posts_data
                 })
+
             }).catch((e) => {
 
         })
